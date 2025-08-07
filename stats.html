@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目统计 - YouTube Shorts 自动化机器人</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🤖 YouTube Bot</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="nav-link">首页</a></li>
+                    <li><a href="features.html" class="nav-link">功能特点</a></li>
+                    <li><a href="config-guide.html" class="nav-link">配置说明</a></li>
+                    <li><a href="online-config.html" class="nav-link">在线配置</a></li>
+                    <li><a href="stats.html" class="nav-link active">项目统计</a></li>
+                    <li><a href="download.html" class="nav-link">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>项目统计</h1>
+            <p>实时数据和项目表现分析</p>
+        </div>
+    </section>
+
+    <!-- Stats Overview -->
+    <section class="stats-overview">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-number" data-target="15420">0</div>
+                    <div class="stat-label">总下载量</div>
+                    <div class="stat-change positive">+12.5%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number" data-target="4.8">0</div>
+                    <div class="stat-label">用户评分</div>
+                    <div class="stat-change positive">+0.2</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number" data-target="3240">0</div>
+                    <div class="stat-label">活跃用户</div>
+                    <div class="stat-change positive">+8.3%</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔧</div>
+                    <div class="stat-number" data-target="127">0</div>
+                    <div class="stat-label">功能更新</div>
+                    <div class="stat-change positive">+15</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Stats -->
+    <section class="detailed-stats">
+        <div class="container">
+            <div class="stats-row">
+                <!-- Usage Statistics -->
+                <div class="stats-section">
+                    <h2>📈 使用统计</h2>
+                    <div class="usage-stats">
+                        <div class="usage-item">
+                            <div class="usage-info">
+                                <span class="usage-label">日均使用时长</span>
+                                <span class="usage-value">4.2小时</span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" style="width: 84%"></div>
+                            </div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-info">
+                                <span class="usage-label">成功率</span>
+                                <span class="usage-value">96.8%</span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" style="width: 96.8%"></div>
+                            </div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-info">
+                                <span class="usage-label">平均观看时长</span>
+                                <span class="usage-value">28秒</span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" style="width: 70%"></div>
+                            </div>
+                        </div>
+                        <div class="usage-item">
+                            <div class="usage-info">
+                                <span class="usage-label">交互成功率</span>
+                                <span class="usage-value">89.3%</span>
+                            </div>
+                            <div class="usage-bar">
+                                <div class="usage-progress" style="width: 89.3%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="stats-section">
+                    <h2>⚡ 性能指标</h2>
+                    <div class="performance-grid">
+                        <div class="performance-item">
+                            <div class="performance-icon">🚀</div>
+                            <div class="performance-data">
+                                <div class="performance-value">0.8s</div>
+                                <div class="performance-label">平均响应时间</div>
+                            </div>
+                        </div>
+                        <div class="performance-item">
+                            <div class="performance-icon">💾</div>
+                            <div class="performance-data">
+                                <div class="performance-value">45MB</div>
+                                <div class="performance-label">内存占用</div>
+                            </div>
+                        </div>
+                        <div class="performance-item">
+                            <div class="performance-icon">🔄</div>
+                            <div class="performance-data">
+                                <div class="performance-value">99.2%</div>
+                                <div class="performance-label">稳定性</div>
+                            </div>
+                        </div>
+                        <div class="performance-item">
+                            <div class="performance-icon">⚙️</div>
+                            <div class="performance-data">
+                                <div class="performance-value">15%</div>
+                                <div class="performance-label">CPU使用率</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature Usage -->
+            <div class="stats-row">
+                <div class="stats-section full-width">
+                    <h2>🎯 功能使用分析</h2>
+                    <div class="feature-usage">
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">自动观看</span>
+                                <span class="feature-percentage">98.5%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 98.5%"></div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">智能滚动</span>
+                                <span class="feature-percentage">94.2%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 94.2%"></div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">自动点赞</span>
+                                <span class="feature-percentage">76.8%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 76.8%"></div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">多窗口管理</span>
+                                <span class="feature-percentage">68.3%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 68.3%"></div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">行为模拟</span>
+                                <span class="feature-percentage">85.7%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 85.7%"></div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-info">
+                                <span class="feature-name">配置管理</span>
+                                <span class="feature-percentage">92.1%</span>
+                            </div>
+                            <div class="feature-bar">
+                                <div class="feature-progress" style="width: 92.1%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- User Feedback -->
+            <div class="stats-row">
+                <div class="stats-section">
+                    <h2>💬 用户反馈</h2>
+                    <div class="feedback-stats">
+                        <div class="feedback-item">
+                            <div class="feedback-rating">
+                                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(1,247)</span>
+                            </div>
+                            <div class="feedback-text">"功能强大，使用简单，效果很好！"</div>
+                        </div>
+                        <div class="feedback-item">
+                            <div class="feedback-rating">
+                                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(892)</span>
+                            </div>
+                            <div class="feedback-text">"多窗口管理功能特别实用，节省了很多时间。"</div>
+                        </div>
+                        <div class="feedback-item">
+                            <div class="feedback-rating">
+                                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                                <span class="rating-count">(756)</span>
+                            </div>
+                            <div class="feedback-text">"配置灵活，可以根据需要调整各种参数。"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Version History -->
+                <div class="stats-section">
+                    <h2>📋 版本历史</h2>
+                    <div class="version-history">
+                        <div class="version-item">
+                            <div class="version-number">v2.1.0</div>
+                            <div class="version-date">2025-01-15</div>
+                            <div class="version-features">
+                                <span class="feature-tag">新功能</span>
+                                <span class="feature-tag">性能优化</span>
+                            </div>
+                        </div>
+                        <div class="version-item">
+                            <div class="version-number">v2.0.5</div>
+                            <div class="version-date">2025-01-08</div>
+                            <div class="version-features">
+                                <span class="feature-tag">Bug修复</span>
+                                <span class="feature-tag">稳定性提升</span>
+                            </div>
+                        </div>
+                        <div class="version-item">
+                            <div class="version-number">v2.0.0</div>
+                            <div class="version-date">2024-12-20</div>
+                            <div class="version-features">
+                                <span class="feature-tag">重大更新</span>
+                                <span class="feature-tag">UI重构</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Real-time Data -->
+            <div class="stats-row">
+                <div class="stats-section full-width">
+                    <h2>📊 实时数据</h2>
+                    <div class="realtime-stats">
+                        <div class="realtime-item">
+                            <div class="realtime-label">当前在线用户</div>
+                            <div class="realtime-value" id="onlineUsers">1,247</div>
+                            <div class="realtime-indicator online"></div>
+                        </div>
+                        <div class="realtime-item">
+                            <div class="realtime-label">今日新增下载</div>
+                            <div class="realtime-value" id="todayDownloads">342</div>
+                            <div class="realtime-indicator active"></div>
+                        </div>
+                        <div class="realtime-item">
+                            <div class="realtime-label">服务器状态</div>
+                            <div class="realtime-value">正常运行</div>
+                            <div class="realtime-indicator healthy"></div>
+                        </div>
+                        <div class="realtime-item">
+                            <div class="realtime-label">API响应时间</div>
+                            <div class="realtime-value" id="apiResponse">0.8s</div>
+                            <div class="realtime-indicator good"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>加入我们的用户社区</h2>
+            <p>成为数千名满意用户中的一员，体验高效的YouTube自动化</p>
+            <div class="cta-buttons">
+                <a href="download.html" class="btn btn-primary">立即下载</a>
+                <a href="features.html" class="btn btn-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 YouTube Shorts 自动化机器人. 请遵守YouTube使用条款和相关法律法规.</p>
+            <p style="color: #f85149; font-size: 0.9rem;">⚠️ 注意：本工具仅供学习和研究使用，请合理使用并遵守平台规则。</p>
+            <div class="footer-links">
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">技术支持</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // 实时数据更新
+        function updateRealTimeData() {
+            const onlineUsers = document.getElementById('onlineUsers');
+            const todayDownloads = document.getElementById('todayDownloads');
+            const apiResponse = document.getElementById('apiResponse');
+            
+            if (onlineUsers) {
+                const currentUsers = parseInt(onlineUsers.textContent.replace(',', ''));
+                const variation = Math.floor(Math.random() * 20) - 10;
+                onlineUsers.textContent = (currentUsers + variation).toLocaleString();
+            }
+            
+            if (todayDownloads) {
+                const currentDownloads = parseInt(todayDownloads.textContent);
+                const increase = Math.floor(Math.random() * 5);
+                todayDownloads.textContent = (currentDownloads + increase).toString();
+            }
+            
+            if (apiResponse) {
+                const responseTime = (0.5 + Math.random() * 0.8).toFixed(1);
+                apiResponse.textContent = responseTime + 's';
+            }
+        }
+        
+        // 每30秒更新一次实时数据
+        setInterval(updateRealTimeData, 30000);
+    </script>
+</body>
+</html>

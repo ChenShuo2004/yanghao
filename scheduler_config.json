@@ -1,0 +1,58 @@
+{
+    "scheduler_settings": {
+        "enabled": true,
+        "timezone": "Asia/Shanghai",
+        "log_level": "INFO",
+        "max_concurrent_runs": 1,
+        "execution_timeout_minutes": 120
+    },
+    "schedules": [
+        {
+            "name": "morning_run",
+            "enabled": true,
+            "type": "daily",
+            "time": "09:00",
+            "description": "每天上午9点运行"
+        },
+        {
+            "name": "afternoon_run",
+            "enabled": true,
+            "type": "daily",
+            "time": "14:00",
+            "description": "每天下午2点运行"
+        },
+        {
+            "name": "evening_run",
+            "enabled": true,
+            "type": "daily",
+            "time": "20:00",
+            "description": "每天晚上8点运行"
+        },
+        {
+            "name": "hourly_run",
+            "enabled": false,
+            "type": "hourly",
+            "interval": 2,
+            "description": "每2小时运行一次（默认禁用）"
+        },
+        {
+            "name": "weekly_run",
+            "enabled": false,
+            "type": "weekly",
+            "day": "monday",
+            "time": "10:00",
+            "description": "每周一上午10点运行（默认禁用）"
+        }
+    ],
+    "notifications": {
+        "enabled": false,
+        "email": {
+            "enabled": false,
+            "smtp_server": "smtp.gmail.com",
+            "smtp_port": 587,
+            "username": "your_email@gmail.com",
+            "password": "your_app_password",
+            "to_email": "your_email@gmail.com"
+        }
+    }
+}

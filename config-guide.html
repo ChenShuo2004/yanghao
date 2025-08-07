@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配置说明 - YouTube Shorts 自动化机器人</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🤖 YouTube Bot</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="nav-link">首页</a></li>
+                    <li><a href="features.html" class="nav-link">功能特点</a></li>
+                    <li><a href="config-guide.html" class="nav-link active">配置说明</a></li>
+                    <li><a href="online-config.html" class="nav-link">在线配置</a></li>
+                    <li><a href="stats.html" class="nav-link">项目统计</a></li>
+                    <li><a href="download.html" class="nav-link">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>配置说明</h1>
+            <p>详细的配置指南和使用说明</p>
+        </div>
+    </section>
+
+    <!-- Configuration Guide -->
+    <section class="config-guide">
+        <div class="container">
+            <!-- 快速开始 -->
+            <div class="guide-section">
+                <h2>🚀 快速开始</h2>
+                <div class="guide-content">
+                    <div class="guide-text">
+                        <h3>环境准备</h3>
+                        <p>在开始使用之前，请确保您的系统满足以下要求：</p>
+                        <ul>
+                            <li>Python 3.8 或更高版本</li>
+                            <li>Chrome 浏览器（最新版本）</li>
+                            <li>稳定的网络连接</li>
+                            <li>足够的系统内存（建议8GB以上）</li>
+                        </ul>
+                    </div>
+                    <div class="code-block">
+                        <h4>安装步骤：</h4>
+                        <pre># 1. 克隆项目
+git clone https://github.com/your-repo/youtube-bot.git
+cd youtube-bot
+
+# 2. 创建虚拟环境
+python -m venv venv
+
+# 3. 激活虚拟环境
+# Windows:
+.\venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# 4. 安装依赖
+pip install -r requirements.txt
+
+# 5. 运行程序
+python main.py</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 配置文件说明 -->
+            <div class="guide-section">
+                <h2>⚙️ 配置文件说明</h2>
+                <div class="guide-content">
+                    <div class="guide-text">
+                        <h3>config.json 结构</h3>
+                        <p>配置文件采用JSON格式，包含以下主要部分：</p>
+                        <ul>
+                            <li><strong>windows：</strong>浏览器窗口配置列表</li>
+                            <li><strong>settings：</strong>全局设置参数</li>
+                            <li><strong>behavior：</strong>用户行为模拟参数</li>
+                            <li><strong>logging：</strong>日志记录配置</li>
+                        </ul>
+                    </div>
+                    <div class="code-block">
+                        <h4>完整配置示例：</h4>
+                        <pre>{
+  "windows": [
+    {
+      "browser_id": "Profile 1",
+      "window_width": 400,
+      "window_height": 600,
+      "position_x": 0,
+      "position_y": 0
+    },
+    {
+      "browser_id": "Profile 2",
+      "window_width": 400,
+      "window_height": 600,
+      "position_x": 400,
+      "position_y": 0
+    }
+  ],
+  "settings": {
+    "watch_time_min": 5,
+    "watch_time_max": 60,
+    "like_probability": 0.1,
+    "subscribe_probability": 0.05,
+    "scroll_count": 1000,
+    "max_videos_per_session": 100
+  },
+  "behavior": {
+    "mouse_speed": 1.0,
+    "scroll_pattern": "smooth",
+    "pause_probability": 0.15,
+    "replay_probability": 0.05,
+    "comment_probability": 0.2,
+    "user_persona": "casual"
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "youtube_bot.log",
+    "max_size": "10MB",
+    "backup_count": 5
+  }
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 参数详解 -->
+            <div class="guide-section">
+                <h2>📋 参数详解</h2>
+                <div class="params-grid">
+                    <div class="param-category">
+                        <h3>🖥️ 窗口设置</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <strong>browser_id</strong>
+                                <p>浏览器配置文件ID，用于多账号管理</p>
+                                <span class="param-type">字符串</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>window_width/height</strong>
+                                <p>浏览器窗口的宽度和高度（像素）</p>
+                                <span class="param-type">整数 (300-1920)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>position_x/y</strong>
+                                <p>窗口在屏幕上的位置坐标</p>
+                                <span class="param-type">整数</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="param-category">
+                        <h3>⏱️ 时间设置</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <strong>watch_time_min/max</strong>
+                                <p>每个视频的观看时长范围（秒）</p>
+                                <span class="param-type">整数 (1-600)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>scroll_delay</strong>
+                                <p>滚动操作之间的延迟时间（毫秒）</p>
+                                <span class="param-type">整数 (100-5000)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>session_duration</strong>
+                                <p>单次会话的最大持续时间（分钟）</p>
+                                <span class="param-type">整数 (10-480)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="param-category">
+                        <h3>🎯 交互概率</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <strong>like_probability</strong>
+                                <p>点赞操作的触发概率</p>
+                                <span class="param-type">浮点数 (0.0-1.0)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>subscribe_probability</strong>
+                                <p>订阅操作的触发概率</p>
+                                <span class="param-type">浮点数 (0.0-1.0)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>comment_probability</strong>
+                                <p>查看评论的触发概率</p>
+                                <span class="param-type">浮点数 (0.0-1.0)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="param-category">
+                        <h3>🎭 行为模拟</h3>
+                        <div class="param-list">
+                            <div class="param-item">
+                                <strong>user_persona</strong>
+                                <p>用户画像类型：casual, active, explorer, focused, random</p>
+                                <span class="param-type">字符串</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>mouse_speed</strong>
+                                <p>鼠标移动速度倍数</p>
+                                <span class="param-type">浮点数 (0.5-3.0)</span>
+                            </div>
+                            <div class="param-item">
+                                <strong>scroll_pattern</strong>
+                                <p>滚动模式：smooth, quick, random, lazy</p>
+                                <span class="param-type">字符串</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 高级配置 -->
+            <div class="guide-section">
+                <h2>🔧 高级配置</h2>
+                <div class="guide-content">
+                    <div class="guide-text">
+                        <h3>多ID管理</h3>
+                        <p>支持同时管理多个浏览器配置文件，每个ID可以有独立的设置：</p>
+                        <ul>
+                            <li>不同的观看偏好和行为模式</li>
+                            <li>独立的交互概率设置</li>
+                            <li>分别的日志记录和统计</li>
+                            <li>灵活的窗口布局管理</li>
+                        </ul>
+                    </div>
+                    <div class="code-block">
+                        <h4>多ID配置示例：</h4>
+                        <pre>{
+  "windows": [
+    {
+      "browser_id": "休闲用户",
+      "settings": {
+        "watch_time_min": 10,
+        "watch_time_max": 30,
+        "like_probability": 0.05,
+        "user_persona": "casual"
+      }
+    },
+    {
+      "browser_id": "活跃用户",
+      "settings": {
+        "watch_time_min": 5,
+        "watch_time_max": 45,
+        "like_probability": 0.15,
+        "subscribe_probability": 0.08,
+        "user_persona": "active"
+      }
+    }
+  ]
+}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 故障排除 -->
+            <div class="guide-section">
+                <h2>🔍 故障排除</h2>
+                <div class="troubleshooting">
+                    <div class="trouble-item">
+                        <h3>❌ 常见问题</h3>
+                        <div class="qa-list">
+                            <div class="qa-item">
+                                <strong>Q: 程序启动后浏览器无法打开？</strong>
+                                <p>A: 检查Chrome浏览器是否正确安装，确保chromedriver版本与Chrome版本匹配。</p>
+                            </div>
+                            <div class="qa-item">
+                                <strong>Q: 视频无法自动播放？</strong>
+                                <p>A: 确保浏览器允许自动播放，可以在Chrome设置中关闭自动播放限制。</p>
+                            </div>
+                            <div class="qa-item">
+                                <strong>Q: 程序运行一段时间后停止？</strong>
+                                <p>A: 检查网络连接，查看日志文件中的错误信息，可能需要调整延迟参数。</p>
+                            </div>
+                            <div class="qa-item">
+                                <strong>Q: 如何查看运行日志？</strong>
+                                <p>A: 日志文件默认保存在项目目录下的youtube_bot.log文件中。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>准备开始配置了吗？</h2>
+            <p>使用我们的在线配置工具，轻松生成您的配置文件</p>
+            <div class="cta-buttons">
+                <a href="online-config.html" class="btn btn-primary">在线配置</a>
+                <a href="download.html" class="btn btn-secondary">下载源码</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 YouTube Shorts 自动化机器人. 请遵守YouTube使用条款和相关法律法规.</p>
+            <p style="color: #f85149; font-size: 0.9rem;">⚠️ 注意：本工具仅供学习和研究使用，请合理使用并遵守平台规则。</p>
+            <div class="footer-links">
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">技术支持</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

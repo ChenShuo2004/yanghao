@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线配置 - YouTube Shorts 自动化机器人</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🤖 YouTube Bot</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="nav-link">首页</a></li>
+                    <li><a href="features.html" class="nav-link">功能特点</a></li>
+                    <li><a href="config-guide.html" class="nav-link">配置说明</a></li>
+                    <li><a href="online-config.html" class="nav-link active">在线配置</a></li>
+                    <li><a href="stats.html" class="nav-link">项目统计</a></li>
+                    <li><a href="download.html" class="nav-link">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>在线配置工具</h1>
+            <p>通过可视化界面轻松配置您的YouTube自动化机器人</p>
+        </div>
+    </section>
+
+    <!-- Configuration Panel Section -->
+    <section id="config-panel" class="config">
+        <div class="container">
+            <div class="config-panel">
+                <div class="config-form">
+                    <h3>基础设置</h3>
+                    <div class="form-group">
+                        <label for="windowWidth">窗口宽度:</label>
+                        <input type="number" id="windowWidth" value="400" min="300" max="1920">
+                    </div>
+                    <div class="form-group">
+                        <label for="windowHeight">窗口高度:</label>
+                        <input type="number" id="windowHeight" value="600" min="400" max="1080">
+                    </div>
+                    <div class="form-group">
+                        <label for="watchTimeMin">最小观看时间(秒):</label>
+                        <input type="number" id="watchTimeMin" value="5" min="1" max="300">
+                    </div>
+                    <div class="form-group">
+                        <label for="watchTimeMax">最大观看时间(秒):</label>
+                        <input type="number" id="watchTimeMax" value="60" min="5" max="600">
+                    </div>
+                    <div class="form-group">
+                        <label for="likeProbability">点赞概率:</label>
+                        <input type="range" id="likeProbability" min="0" max="1" step="0.01" value="0.1">
+                        <span id="likeProbabilityValue">10%</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="subscribeProbability">订阅概率:</label>
+                        <input type="range" id="subscribeProbability" min="0" max="1" step="0.01" value="0.05">
+                        <span id="subscribeProbabilityValue">5%</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="scrollCount">滚动次数:</label>
+                        <input type="number" id="scrollCount" value="1000" min="100" max="5000">
+                    </div>
+
+                    <h3>浏览器ID管理</h3>
+                    <div class="form-group">
+                        <label for="browserIds">浏览器ID列表:</label>
+                        <div id="browserIdContainer">
+                            <div class="browser-id-item">
+                                <input type="text" class="browser-id-input" placeholder="请输入浏览器ID">
+                                <button type="button" class="btn-remove" onclick="removeBrowserId(this)">❌</button>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-secondary" onclick="addBrowserId()">➕ 添加浏览器ID</button>
+                    </div>
+
+                    <h3>用户行为模拟设置</h3>
+                    <div class="form-group">
+                        <div class="behavior-settings">
+                            <div class="behavior-item">
+                                <label for="mouseSpeed">鼠标移动速度:</label>
+                                <input type="range" id="mouseSpeed" min="0.5" max="3" step="0.1" value="1">
+                                <span id="mouseSpeedValue">正常</span>
+                            </div>
+                            <div class="behavior-item">
+                                <label for="scrollPattern">滚动模式:</label>
+                                <select id="scrollPattern">
+                                    <option value="smooth">平滑滚动</option>
+                                    <option value="quick">快速滚动</option>
+                                    <option value="random">随机模式</option>
+                                    <option value="lazy">懒散模式</option>
+                                </select>
+                            </div>
+                            <div class="behavior-item">
+                                <label for="pauseProbability">暂停观看概率:</label>
+                                <input type="range" id="pauseProbability" min="0" max="1" step="0.01" value="0.15">
+                                <span id="pauseProbabilityValue">15%</span>
+                            </div>
+                            <div class="behavior-item">
+                                <label for="replayProbability">重播视频概率:</label>
+                                <input type="range" id="replayProbability" min="0" max="1" step="0.01" value="0.05">
+                                <span id="replayProbabilityValue">5%</span>
+                            </div>
+                            <div class="behavior-item">
+                                <label for="commentProbability">查看评论概率:</label>
+                                <input type="range" id="commentProbability" min="0" max="1" step="0.01" value="0.2">
+                                <span id="commentProbabilityValue">20%</span>
+                            </div>
+                            <div class="behavior-item">
+                                <label for="userPersona">用户画像:</label>
+                                <select id="userPersona">
+                                    <option value="casual">休闲用户</option>
+                                    <option value="active">活跃用户</option>
+                                    <option value="explorer">探索用户</option>
+                                    <option value="focused">专注用户</option>
+                                    <option value="random">随机模式</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>文件操作</h3>
+                    <div class="form-group">
+                        <label for="configFile">上传现有配置文件:</label>
+                        <input type="file" id="configFile" accept=".json" onchange="loadConfig(event)">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
+                        <button class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
+                        <button class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
+                    </div>
+                </div>
+                <div class="config-preview">
+                    <h3>配置预览</h3>
+                    <div class="code-block">
+                        <pre id="configOutput">{
+  "windows": [
+    {
+      "browser_id": "请输入浏览器ID"
+    }
+  ],
+  "settings": {
+    "window_width": 400,
+    "window_height": 600,
+    "watch_time_min": 5,
+    "watch_time_max": 60,
+    "like_probability": 0.1,
+    "subscribe_probability": 0.05,
+    "scroll_count": 1000,
+    "mouse_speed": 1.0,
+    "scroll_pattern": "smooth",
+    "pause_probability": 0.15,
+    "replay_probability": 0.05,
+    "comment_probability": 0.2,
+    "user_persona": "casual"
+  }
+}</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Section -->
+    <section class="help-section">
+        <div class="container">
+            <h2>配置说明</h2>
+            <div class="help-grid">
+                <div class="help-item">
+                    <h3>🎯 基础设置</h3>
+                    <ul>
+                        <li><strong>窗口尺寸：</strong>设置浏览器窗口的宽度和高度</li>
+                        <li><strong>观看时间：</strong>每个视频的观看时长范围</li>
+                        <li><strong>交互概率：</strong>点赞和订阅的触发概率</li>
+                        <li><strong>滚动次数：</strong>每次会话的滚动操作次数</li>
+                    </ul>
+                </div>
+                <div class="help-item">
+                    <h3>👥 多ID管理</h3>
+                    <ul>
+                        <li><strong>浏览器ID：</strong>支持同时管理多个浏览器配置文件</li>
+                        <li><strong>独立配置：</strong>每个ID可以有不同的行为参数</li>
+                        <li><strong>批量操作：</strong>一键启动所有配置的ID</li>
+                        <li><strong>动态管理：</strong>运行时可以添加或删除ID</li>
+                    </ul>
+                </div>
+                <div class="help-item">
+                    <h3>🎭 行为模拟</h3>
+                    <ul>
+                        <li><strong>鼠标速度：</strong>控制鼠标移动的速度和自然度</li>
+                        <li><strong>滚动模式：</strong>不同的页面滚动行为模式</li>
+                        <li><strong>用户画像：</strong>模拟不同类型用户的行为特征</li>
+                        <li><strong>高级交互：</strong>暂停、重播、评论浏览等功能</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 YouTube Shorts 自动化机器人. 请遵守YouTube使用条款和相关法律法规.</p>
+            <p style="color: #f85149; font-size: 0.9rem;">⚠️ 注意：本工具仅供学习和研究使用，请合理使用并遵守平台规则。</p>
+            <div class="footer-links">
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">技术支持</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="config.js"></script>
+</body>
+</html>

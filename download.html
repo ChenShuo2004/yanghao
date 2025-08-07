@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下载 - YouTube Shorts 自动化机器人</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🤖 YouTube Bot</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="nav-link">首页</a></li>
+                    <li><a href="features.html" class="nav-link">功能特点</a></li>
+                    <li><a href="config-guide.html" class="nav-link">配置说明</a></li>
+                    <li><a href="online-config.html" class="nav-link">在线配置</a></li>
+                    <li><a href="stats.html" class="nav-link">项目统计</a></li>
+                    <li><a href="download.html" class="nav-link active">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>下载中心</h1>
+            <p>获取最新版本的YouTube Shorts自动化机器人</p>
+        </div>
+    </section>
+
+    <!-- Download Options -->
+    <section class="download-section">
+        <div class="container">
+            <div class="download-grid">
+                <!-- 主要下载 -->
+                <div class="download-card featured">
+                    <div class="download-header">
+                        <div class="download-icon">🚀</div>
+                        <h3>完整版本</h3>
+                        <div class="version-tag">v2.1.0</div>
+                    </div>
+                    <div class="download-features">
+                        <ul>
+                            <li>✅ 完整功能集</li>
+                            <li>✅ 多窗口管理</li>
+                            <li>✅ 智能行为模拟</li>
+                            <li>✅ 配置管理工具</li>
+                            <li>✅ 详细文档</li>
+                            <li>✅ 技术支持</li>
+                        </ul>
+                    </div>
+                    <div class="download-info">
+                        <div class="file-size">文件大小: 15.2 MB</div>
+                        <div class="download-count">下载次数: 15,420</div>
+                        <div class="last-updated">更新时间: 2025-01-15</div>
+                    </div>
+                    <div class="download-buttons">
+                        <button class="btn btn-primary download-btn" data-file="youtube-bot-v2.1.0.zip">
+                            <span class="btn-icon">⬇️</span>
+                            立即下载
+                        </button>
+                        <button class="btn btn-secondary" onclick="showChecksums('main')">
+                            校验信息
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 轻量版 -->
+                <div class="download-card">
+                    <div class="download-header">
+                        <div class="download-icon">⚡</div>
+                        <h3>轻量版本</h3>
+                        <div class="version-tag">v2.1.0-lite</div>
+                    </div>
+                    <div class="download-features">
+                        <ul>
+                            <li>✅ 核心功能</li>
+                            <li>✅ 基础自动化</li>
+                            <li>✅ 简化配置</li>
+                            <li>❌ 高级功能</li>
+                            <li>❌ 多窗口管理</li>
+                            <li>❌ 行为模拟</li>
+                        </ul>
+                    </div>
+                    <div class="download-info">
+                        <div class="file-size">文件大小: 8.5 MB</div>
+                        <div class="download-count">下载次数: 7,832</div>
+                        <div class="last-updated">更新时间: 2025-01-15</div>
+                    </div>
+                    <div class="download-buttons">
+                        <button class="btn btn-primary download-btn" data-file="youtube-bot-lite-v2.1.0.zip">
+                            <span class="btn-icon">⬇️</span>
+                            下载轻量版
+                        </button>
+                        <button class="btn btn-secondary" onclick="showChecksums('lite')">
+                            校验信息
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 源代码 -->
+                <div class="download-card">
+                    <div class="download-header">
+                        <div class="download-icon">💻</div>
+                        <h3>源代码</h3>
+                        <div class="version-tag">开源</div>
+                    </div>
+                    <div class="download-features">
+                        <ul>
+                            <li>✅ 完整源码</li>
+                            <li>✅ 可自定义修改</li>
+                            <li>✅ 学习研究</li>
+                            <li>✅ MIT许可证</li>
+                            <li>✅ 社区支持</li>
+                            <li>✅ 持续更新</li>
+                        </ul>
+                    </div>
+                    <div class="download-info">
+                        <div class="file-size">文件大小: 3.2 MB</div>
+                        <div class="download-count">Star: 2,847</div>
+                        <div class="last-updated">更新时间: 2025-01-15</div>
+                    </div>
+                    <div class="download-buttons">
+                        <a href="https://github.com/your-repo/youtube-bot" class="btn btn-primary" target="_blank">
+                            <span class="btn-icon">🔗</span>
+                            GitHub仓库
+                        </a>
+                        <button class="btn btn-secondary download-btn" data-file="youtube-bot-source.zip">
+                            下载ZIP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Requirements -->
+    <section class="requirements-section">
+        <div class="container">
+            <h2>系统要求</h2>
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <div class="requirement-icon">🖥️</div>
+                    <h3>操作系统</h3>
+                    <ul>
+                        <li>Windows 10/11 (64位)</li>
+                        <li>macOS 10.15 或更高版本</li>
+                        <li>Ubuntu 18.04 或更高版本</li>
+                        <li>其他Linux发行版</li>
+                    </ul>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon">🐍</div>
+                    <h3>Python环境</h3>
+                    <ul>
+                        <li>Python 3.8 或更高版本</li>
+                        <li>pip包管理器</li>
+                        <li>虚拟环境支持</li>
+                        <li>管理员权限（可选）</li>
+                    </ul>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon">🌐</div>
+                    <h3>浏览器</h3>
+                    <ul>
+                        <li>Google Chrome (推荐)</li>
+                        <li>Chromium浏览器</li>
+                        <li>Microsoft Edge</li>
+                        <li>对应的WebDriver</li>
+                    </ul>
+                </div>
+                <div class="requirement-card">
+                    <div class="requirement-icon">💾</div>
+                    <h3>硬件要求</h3>
+                    <ul>
+                        <li>内存: 4GB RAM (推荐8GB)</li>
+                        <li>存储: 500MB可用空间</li>
+                        <li>网络: 稳定的互联网连接</li>
+                        <li>显示器: 1024x768分辨率</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Guide -->
+    <section class="installation-section">
+        <div class="container">
+            <h2>安装指南</h2>
+            <div class="installation-steps">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>下载文件</h3>
+                        <p>选择适合您需求的版本并下载到本地</p>
+                        <div class="step-code">
+                            <code>wget https://releases.github.com/youtube-bot-v2.1.0.zip</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>解压文件</h3>
+                        <p>将下载的压缩包解压到您选择的目录</p>
+                        <div class="step-code">
+                            <code>unzip youtube-bot-v2.1.0.zip<br>cd youtube-bot</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>安装依赖</h3>
+                        <p>使用pip安装所需的Python包</p>
+                        <div class="step-code">
+                            <code>pip install -r requirements.txt</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>配置设置</h3>
+                        <p>根据需要修改config.json配置文件</p>
+                        <div class="step-code">
+                            <code>cp config.example.json config.json<br>nano config.json</code>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>运行程序</h3>
+                        <p>启动YouTube自动化机器人</p>
+                        <div class="step-code">
+                            <code>python main.py</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Version History -->
+    <section class="version-history-section">
+        <div class="container">
+            <h2>版本历史</h2>
+            <div class="version-timeline">
+                <div class="version-item">
+                    <div class="version-date">2025-01-15</div>
+                    <div class="version-info">
+                        <h3>v2.1.0 - 重大更新</h3>
+                        <ul>
+                            <li>🆕 新增智能行为模拟功能</li>
+                            <li>🔧 优化多窗口管理性能</li>
+                            <li>🐛 修复已知的稳定性问题</li>
+                            <li>📱 改进移动端兼容性</li>
+                            <li>🎨 全新的用户界面设计</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="version-item">
+                    <div class="version-date">2025-01-08</div>
+                    <div class="version-info">
+                        <h3>v2.0.5 - 稳定性更新</h3>
+                        <ul>
+                            <li>🔧 提升系统稳定性</li>
+                            <li>🐛 修复内存泄漏问题</li>
+                            <li>⚡ 优化启动速度</li>
+                            <li>📝 更新文档和示例</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="version-item">
+                    <div class="version-date">2024-12-20</div>
+                    <div class="version-info">
+                        <h3>v2.0.0 - 架构重构</h3>
+                        <ul>
+                            <li>🏗️ 全新的架构设计</li>
+                            <li>🎯 更精准的目标识别</li>
+                            <li>🔄 支持实时配置更新</li>
+                            <li>📊 增强的统计功能</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="support-section">
+        <div class="container">
+            <h2>技术支持</h2>
+            <div class="support-grid">
+                <div class="support-card">
+                    <div class="support-icon">📚</div>
+                    <h3>文档中心</h3>
+                    <p>详细的使用说明和API文档</p>
+                    <a href="config-guide.html" class="support-link">查看文档</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">💬</div>
+                    <h3>社区论坛</h3>
+                    <p>与其他用户交流经验和技巧</p>
+                    <a href="#" class="support-link">访问论坛</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">🐛</div>
+                    <h3>问题反馈</h3>
+                    <p>报告Bug或提出功能建议</p>
+                    <a href="#" class="support-link">提交Issue</a>
+                </div>
+                <div class="support-card">
+                    <div class="support-icon">📧</div>
+                    <h3>邮件支持</h3>
+                    <p>直接联系我们的技术团队</p>
+                    <a href="mailto:support@example.com" class="support-link">发送邮件</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 YouTube Shorts 自动化机器人. 请遵守YouTube使用条款和相关法律法规.</p>
+            <p style="color: #f85149; font-size: 0.9rem;">⚠️ 注意：本工具仅供学习和研究使用，请合理使用并遵守平台规则。</p>
+            <div class="footer-links">
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">技术支持</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Checksum Modal -->
+    <div id="checksumModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>文件校验信息</h3>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="checksumContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 下载功能
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const fileName = this.getAttribute('data-file');
+                if (fileName) {
+                    // 模拟下载
+                    this.innerHTML = '<span class="btn-icon">⏳</span> 下载中...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = '<span class="btn-icon">✅</span> 下载完成';
+                        setTimeout(() => {
+                            this.innerHTML = '<span class="btn-icon">⬇️</span> 立即下载';
+                            this.disabled = false;
+                        }, 2000);
+                    }, 3000);
+                    
+                    // 这里应该是实际的下载逻辑
+                    console.log('下载文件:', fileName);
+                }
+            });
+        });
+        
+        // 校验信息显示
+        function showChecksums(version) {
+            const checksums = {
+                main: {
+                    md5: 'a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6',
+                    sha256: '1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7a8b9c0d1e2f3'
+                },
+                lite: {
+                    md5: 'f6e5d4c3b2a1g9h8i7j6k5l4m3n2o1p0',
+                    sha256: '9z8y7x6w5v4u3t2s1r0q9p8o7n6m5l4k3j2i1h0g9f8e7d6c5b4a3z2y1x0w9v8u7'
+                }
+            };
+            
+            const data = checksums[version];
+            const content = `
+                <div class="checksum-info">
+                    <h4>MD5校验值:</h4>
+                    <code>${data.md5}</code>
+                    <h4>SHA256校验值:</h4>
+                    <code>${data.sha256}</code>
+                    <p class="checksum-note">请在下载完成后验证文件完整性</p>
+                </div>
+            `;
+            
+            document.getElementById('checksumContent').innerHTML = content;
+            document.getElementById('checksumModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('checksumModal').style.display = 'none';
+        }
+        
+        // 点击模态框外部关闭
+        window.onclick = function(event) {
+            const modal = document.getElementById('checksumModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

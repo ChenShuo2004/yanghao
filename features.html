@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能特点 - YouTube Shorts 自动化机器人</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div id="loading" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">
+        <span>↑</span>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">🤖 YouTube Bot</div>
+                <ul class="nav-links">
+                    <li><a href="home.html" class="nav-link">首页</a></li>
+                    <li><a href="features.html" class="nav-link active">功能特点</a></li>
+                    <li><a href="config-guide.html" class="nav-link">配置说明</a></li>
+                    <li><a href="online-config.html" class="nav-link">在线配置</a></li>
+                    <li><a href="stats.html" class="nav-link">项目统计</a></li>
+                    <li><a href="download.html" class="nav-link">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>功能特点</h1>
+            <p>全面了解YouTube Shorts自动化机器人的强大功能</p>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <!-- 核心功能模块 -->
+            <div class="feature-section" id="core-features">
+                <h2 class="section-title">🚀 核心功能模块</h2>
+                <div class="features-grid">
+                    <div class="feature-card enhanced" id="multi-window">
+                        <div class="feature-icon">🖥️</div>
+                        <h3>多窗口并行操作</h3>
+                        <p>同时控制多个浏览器窗口，支持批量操作，大幅提升工作效率。每个窗口独立运行，互不干扰，可自定义窗口大小和位置。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 并行处理</span>
+                            <span class="detail-tag">✓ 独立控制</span>
+                            <span class="detail-tag">✓ 自定义布局</span>
+                        </div>
+                        <div class="feature-specs">
+                            <h4>技术规格：</h4>
+                            <ul>
+                                <li>支持同时运行多达10个浏览器窗口</li>
+                                <li>每个窗口独立的配置参数</li>
+                                <li>智能窗口位置管理</li>
+                                <li>内存优化和性能监控</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-card enhanced" id="smart-watch">
+                        <div class="feature-icon">👁️</div>
+                        <h3>智能视频观看</h3>
+                        <p>自动播放YouTube Shorts视频，智能识别视频内容，模拟真实用户的观看行为模式，包括观看时长控制和视频切换。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 自动播放</span>
+                            <span class="detail-tag">✓ 时长控制</span>
+                            <span class="detail-tag">✓ 智能切换</span>
+                        </div>
+                        <div class="feature-specs">
+                            <h4>观看策略：</h4>
+                            <ul>
+                                <li>可配置观看时长范围（5-600秒）</li>
+                                <li>智能视频内容识别</li>
+                                <li>模拟真实用户观看模式</li>
+                                <li>自动处理广告和弹窗</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="feature-card enhanced" id="smart-interaction">
+                        <div class="feature-icon">🎯</div>
+                        <h3>智能交互系统</h3>
+                        <p>基于概率算法的智能交互，包括点赞、订阅、评论浏览等操作。支持自定义交互概率，避免机械化操作被检测。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 概率控制</span>
+                            <span class="detail-tag">✓ 多种交互</span>
+                            <span class="detail-tag">✓ 防检测</span>
+                        </div>
+                        <div class="feature-specs">
+                            <h4>交互类型：</h4>
+                            <ul>
+                                <li>智能点赞（可配置概率0-100%）</li>
+                                <li>自动订阅（可配置概率0-100%）</li>
+                                <li>评论区浏览</li>
+                                <li>视频分享和收藏</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 最新功能模块 -->
+            <div class="feature-section" id="new-features">
+                <h2 class="section-title">🆕 最新功能特性</h2>
+                <div class="features-grid">
+                    <div class="feature-card new-feature">
+                        <div class="feature-icon">👥</div>
+                        <div class="new-badge">NEW</div>
+                        <h3>多ID账号管理</h3>
+                        <p>革命性的多账号管理系统，支持同时操作多个浏览器ID。每个ID独立配置，支持不同的行为模式和参数设置，实现真正的批量自动化。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 批量管理</span>
+                            <span class="detail-tag">✓ 独立配置</span>
+                            <span class="detail-tag">✓ 动态添加</span>
+                        </div>
+                        <div class="feature-highlight">
+                            <strong>支持功能：</strong>动态添加/删除ID、批量操作、独立日志记录
+                        </div>
+                    </div>
+                    <div class="feature-card new-feature">
+                        <div class="feature-icon">🎭</div>
+                        <div class="new-badge">NEW</div>
+                        <h3>用户行为模拟引擎</h3>
+                        <p>基于AI的用户行为模拟系统，包含5种用户画像模式。模拟真实用户的鼠标操作、滚动习惯、观看模式，让自动化操作更加自然。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 5种画像</span>
+                            <span class="detail-tag">✓ 鼠标模拟</span>
+                            <span class="detail-tag">✓ 行为分析</span>
+                        </div>
+                        <div class="feature-highlight">
+                            <strong>画像类型：</strong>休闲用户、活跃用户、探索用户、专注用户、随机模式
+                        </div>
+                    </div>
+                    <div class="feature-card new-feature">
+                        <div class="feature-icon">🎮</div>
+                        <div class="new-badge">NEW</div>
+                        <h3>高级交互控制</h3>
+                        <p>新增暂停观看、重播视频、评论浏览等高级交互功能。支持4种滚动模式，可调节鼠标移动速度，让操作更加人性化。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 暂停重播</span>
+                            <span class="detail-tag">✓ 评论浏览</span>
+                            <span class="detail-tag">✓ 滚动模式</span>
+                        </div>
+                        <div class="feature-highlight">
+                            <strong>滚动模式：</strong>平滑滚动、快速滚动、随机模式、懒散模式
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术特性模块 -->
+            <div class="feature-section" id="tech-features">
+                <h2 class="section-title">⚙️ 技术特性</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>灵活配置系统</h3>
+                        <p>强大的配置系统，支持Web界面配置和JSON文件导入导出。所有参数可实时调整，配置即时生效。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ Web配置</span>
+                            <span class="detail-tag">✓ 文件导入</span>
+                            <span class="detail-tag">✓ 实时预览</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>详细日志系统</h3>
+                        <p>完整记录所有操作过程，包括窗口状态、视频交互、错误信息等。支持日志分析和调试功能。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 操作记录</span>
+                            <span class="detail-tag">✓ 错误追踪</span>
+                            <span class="detail-tag">✓ 性能分析</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>安全防护机制</h3>
+                        <p>内置多重安全防护机制，包括随机等待时间、行为模式变化、请求频率控制等，有效避免被平台检测。</p>
+                        <div class="feature-details">
+                            <span class="detail-tag">✓ 随机等待</span>
+                            <span class="detail-tag">✓ 行为变化</span>
+                            <span class="detail-tag">✓ 频率控制</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>准备开始使用了吗？</h2>
+            <p>立即下载并体验这些强大的功能</p>
+            <div class="cta-buttons">
+                <a href="download.html" class="btn btn-primary">立即下载</a>
+                <a href="online-config.html" class="btn btn-secondary">在线配置</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 YouTube Shorts 自动化机器人. 请遵守YouTube使用条款和相关法律法规.</p>
+            <p style="color: #f85149; font-size: 0.9rem;">⚠️ 注意：本工具仅供学习和研究使用，请合理使用并遵守平台规则。</p>
+            <div class="footer-links">
+                <a href="#">使用条款</a>
+                <a href="#">隐私政策</a>
+                <a href="#">技术支持</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

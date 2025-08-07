@@ -1,0 +1,46 @@
+程序入口点被执行...
+程序开始执行...
+日志配置完成...
+正在加载配置...
+配置加载完成: {'windows': [{'browser_id': ''}], 'settings': {'window_width': 400, 'window_height': 600, 'watch_time_min': 5, 'watch_time_max': 60, 'like_probability': 0.1, 'subscribe_probability': 0.05, 'scroll_count': 300}}
+正在初始化窗口管理器...
+窗口管理器初始化完成...
+获取到的窗口ID: ['']
+比特浏览器API是否可用: True
+尝试创建新的浏览器实例...
+使用比特浏览器API创建浏览器...
+API响应状态码: 200
+打印响应内容时出错: 'gbk' codec can't encode character '\xf1' in position 5157: illegal multibyte sequence
+成功创建浏览器实例，ID: cdc1b6ff49d44d888e493e6c8c0ca439
+正在打开所有窗口...
+正在打开窗口 cdc1b6ff49d44d888e493e6c8c0ca439
+窗口打开响应: {'success': True, 'data': {'ws': 'ws://127.0.0.1:59301/devtools/browser/241dcadd-f7e6-419e-b91a-6ed3fe27fd57', 'http': '127.0.0.1:59301', 'coreVersion': '124', 'driver': 'C:\\Users\\Administrator\\AppData\\Roaming\\BitBrowser\\chromedriver\\124\\chromedriver.exe', 'seq': 23, 'name': 'google', 'remark': 'YouTube Bot', 'groupId': '4028808b985a3b6f0198688be17f5260', 'pid': 40416}}
+2025-08-06 10:43:53,184 - INFO - Successfully opened window cdc1b6ff49d44d888e493e6c8c0ca439
+所有窗口已打开
+2025-08-06 10:43:53,185 - INFO - All windows opened
+2025-08-06 10:44:01,195 - INFO - Arranging windows...
+Windows arranged successfully
+2025-08-06 10:44:01,516 - INFO - Windows arranged successfully
+[cdc1b6ff49d44d888e493e6c8c0ca439] 开始初始化浏览器...
+2025-08-06 10:44:05,281 - ERROR - Bot error for window cdc1b6ff49d44d888e493e6c8c0ca439: 'gbk' codec can't encode character '\u2715' in position 35: illegal multibyte sequence
+关闭窗口 cdc1b6ff49d44d888e493e6c8c0ca439 响应: {"success":true,"data":"操作成功"}
+2025-08-06 10:44:06,299 - INFO - Closed window cdc1b6ff49d44d888e493e6c8c0ca439
+程序执行完毕...
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000245E7956980>
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 116, in __del__
+    _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 80, in __repr__
+    info.append(f'fd={self._sock.fileno()}')
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_utils.py", line 102, in fileno
+    raise ValueError("I/O operation on closed pipe")
+ValueError: I/O operation on closed pipe
+Exception ignored in: <function _ProactorBasePipeTransport.__del__ at 0x00000245E7956980>
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 116, in __del__
+    _warn(f"unclosed transport {self!r}", ResourceWarning, source=self)
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\proactor_events.py", line 80, in __repr__
+    info.append(f'fd={self._sock.fileno()}')
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python313\Lib\asyncio\windows_utils.py", line 102, in fileno
+    raise ValueError("I/O operation on closed pipe")
+ValueError: I/O operation on closed pipe

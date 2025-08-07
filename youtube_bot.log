@@ -1,0 +1,180 @@
+2025-08-06 10:02:02,465 - ERROR - Failed to open window xxxxxxxxxxxxxxxxxxxxxxxxxxxx: {'success': False, 'msg': 'ID不合法'}
+2025-08-06 10:02:02,465 - INFO - All windows opened
+2025-08-06 10:02:10,470 - INFO - Arranging windows...
+2025-08-06 10:02:10,905 - INFO - Windows arranged successfully
+2025-08-06 10:02:13,908 - ERROR - Window xxxxxxxxxxxxxxxxxxxxxxxxxxxx not found in manager
+2025-08-06 10:02:13,909 - ERROR - No tasks created, all windows failed to open
+2025-08-06 10:04:51,852 - INFO - Successfully opened window d3cc818a8c6947a1989da9964addc96e
+2025-08-06 10:04:51,852 - INFO - All windows opened
+2025-08-06 10:04:59,858 - INFO - Arranging windows...
+2025-08-06 10:05:00,199 - INFO - Windows arranged successfully
+2025-08-06 10:05:14,010 - ERROR - Bot error for window d3cc818a8c6947a1989da9964addc96e: Page.goto: net::ERR_CONNECTION_RESET at https://www.youtube.com/shorts
+Call log:
+  - navigating to "https://www.youtube.com/shorts", waiting until "load"
+
+2025-08-06 10:05:15,111 - INFO - Closed window d3cc818a8c6947a1989da9964addc96e
+2025-08-06 10:07:25,377 - ERROR - Failed to open window test_browser_id: {'success': False, 'msg': 'ID不合法'}
+2025-08-06 10:07:25,377 - INFO - All windows opened
+2025-08-06 10:07:33,391 - INFO - Arranging windows...
+2025-08-06 10:07:33,666 - INFO - Windows arranged successfully
+2025-08-06 10:07:36,682 - ERROR - Window test_browser_id not found in manager
+2025-08-06 10:07:36,682 - ERROR - No tasks created, all windows failed to open
+2025-08-06 10:34:52,214 - ERROR - Failed to open window : {'success': False, 'msg': 'ID不合法'}
+2025-08-06 10:34:52,215 - INFO - All windows opened
+2025-08-06 10:35:00,223 - INFO - Arranging windows...
+2025-08-06 10:35:00,507 - INFO - Windows arranged successfully
+2025-08-06 10:35:03,509 - ERROR - Window  not found in manager
+2025-08-06 10:35:03,509 - ERROR - No tasks created, all windows failed to open
+2025-08-06 10:42:26,336 - ERROR - Failed to open window : {'success': False, 'msg': 'ID不合法'}
+2025-08-06 10:42:26,336 - INFO - All windows opened
+2025-08-06 10:42:34,350 - INFO - Arranging windows...
+2025-08-06 10:42:34,619 - INFO - Windows arranged successfully
+2025-08-06 10:42:37,625 - ERROR - Window  not found in manager
+2025-08-06 10:42:37,625 - ERROR - No tasks created, all windows failed to open
+2025-08-06 10:43:53,184 - INFO - Successfully opened window cdc1b6ff49d44d888e493e6c8c0ca439
+2025-08-06 10:43:53,185 - INFO - All windows opened
+2025-08-06 10:44:01,195 - INFO - Arranging windows...
+2025-08-06 10:44:01,516 - INFO - Windows arranged successfully
+2025-08-06 10:44:05,281 - ERROR - Bot error for window cdc1b6ff49d44d888e493e6c8c0ca439: 'gbk' codec can't encode character '\u2715' in position 35: illegal multibyte sequence
+2025-08-06 10:44:06,299 - INFO - Closed window cdc1b6ff49d44d888e493e6c8c0ca439
+2025-08-06 10:50:51,090 - INFO - Successfully opened window 0318de909d344c94971a674d04916ef9
+2025-08-06 10:50:51,091 - INFO - All windows opened
+2025-08-06 10:50:59,103 - INFO - Arranging windows...
+2025-08-06 10:50:59,428 - INFO - Windows arranged successfully
+2025-08-06 10:51:02,430 - ERROR - Window f2ec5867197d408f83d06d9f70125deb not found in manager
+2025-08-06 10:51:02,430 - ERROR - Window 8f08e651e8194598b5578dc50d2010aa not found in manager
+2025-08-06 10:51:02,430 - ERROR - Window a5bb029c4c1347fbaa2cb18932eaa68b not found in manager
+2025-08-06 11:24:17,945 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 11:24:20,256 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 11:24:22,550 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 11:24:24,864 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 11:24:24,864 - INFO - All windows opened
+2025-08-06 11:24:32,879 - INFO - Arranging windows...
+2025-08-06 11:24:33,170 - INFO - Windows arranged successfully
+2025-08-06 11:31:37,727 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 11:31:40,040 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 11:31:42,383 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 11:31:44,686 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 11:31:47,009 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 11:31:47,010 - INFO - All windows opened
+2025-08-06 11:31:55,021 - INFO - Arranging windows...
+2025-08-06 11:31:55,383 - INFO - Windows arranged successfully
+2025-08-06 11:57:29,406 - INFO - [7c7d16093535417889bf61dcaf1173cc] 统计信息 - 总视频数: 250, 点赞: 31/32, 订阅: 12/14
+2025-08-06 11:59:30,651 - INFO - [f2ec5867197d408f83d06d9f70125deb] 统计信息 - 总视频数: 250, 点赞: 28/30, 订阅: 5/8
+2025-08-06 12:00:58,770 - INFO - [a5bb029c4c1347fbaa2cb18932eaa68b] 统计信息 - 总视频数: 250, 点赞: 18/24, 订阅: 5/7
+2025-08-06 12:01:12,324 - INFO - [8f08e651e8194598b5578dc50d2010aa] 统计信息 - 总视频数: 250, 点赞: 30/30, 订阅: 5/6
+2025-08-06 12:01:56,943 - INFO - [1756dcfa03fd4c78ad8cdbeb9e2e39d8] 统计信息 - 总视频数: 250, 点赞: 25/28, 订阅: 9/14
+2025-08-06 12:01:57,999 - INFO - Closed window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 12:01:59,038 - INFO - Closed window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 12:02:00,076 - INFO - Closed window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 12:02:01,113 - INFO - Closed window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 12:02:02,141 - INFO - Closed window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 12:38:40,681 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 12:38:48,959 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 12:39:15,052 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 12:39:23,637 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 12:39:32,578 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 12:39:32,578 - INFO - All windows opened
+2025-08-06 12:39:40,578 - INFO - Arranging windows...
+2025-08-06 12:39:40,878 - INFO - Windows arranged successfully
+2025-08-06 13:04:40,362 - INFO - [1756dcfa03fd4c78ad8cdbeb9e2e39d8] 统计信息 - 总视频数: 250, 点赞: 18/21, 订阅: 7/8
+2025-08-06 13:06:39,935 - INFO - [a5bb029c4c1347fbaa2cb18932eaa68b] 统计信息 - 总视频数: 250, 点赞: 32/35, 订阅: 11/14
+2025-08-06 13:06:51,443 - INFO - [f2ec5867197d408f83d06d9f70125deb] 统计信息 - 总视频数: 250, 点赞: 25/27, 订阅: 1/1
+2025-08-06 13:06:59,111 - INFO - [8f08e651e8194598b5578dc50d2010aa] 统计信息 - 总视频数: 250, 点赞: 26/26, 订阅: 16/19
+2025-08-06 13:07:56,497 - INFO - [7c7d16093535417889bf61dcaf1173cc] 统计信息 - 总视频数: 250, 点赞: 29/33, 订阅: 13/17
+2025-08-06 13:07:57,526 - INFO - Closed window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 13:07:58,545 - INFO - Closed window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 13:07:59,572 - INFO - Closed window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 13:08:00,620 - INFO - Closed window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 13:08:01,656 - INFO - Closed window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 13:12:38,668 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 13:12:52,126 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 13:13:01,565 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 13:13:11,403 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 13:13:20,602 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 13:13:20,602 - INFO - All windows opened
+2025-08-06 13:13:28,604 - INFO - Arranging windows...
+2025-08-06 13:13:28,910 - INFO - Windows arranged successfully
+2025-08-06 13:38:48,004 - INFO - [8f08e651e8194598b5578dc50d2010aa] 统计信息 - 总视频数: 250, 点赞: 31/31, 订阅: 12/14
+2025-08-06 13:40:04,745 - INFO - [a5bb029c4c1347fbaa2cb18932eaa68b] 统计信息 - 总视频数: 250, 点赞: 29/33, 订阅: 7/13
+2025-08-06 13:40:50,301 - INFO - [7c7d16093535417889bf61dcaf1173cc] 统计信息 - 总视频数: 250, 点赞: 18/20, 订阅: 8/10
+2025-08-06 13:42:57,469 - INFO - [f2ec5867197d408f83d06d9f70125deb] 统计信息 - 总视频数: 250, 点赞: 13/13, 订阅: 6/8
+2025-08-06 13:45:00,182 - INFO - [1756dcfa03fd4c78ad8cdbeb9e2e39d8] 统计信息 - 总视频数: 250, 点赞: 14/14, 订阅: 11/18
+2025-08-06 13:45:01,216 - INFO - Closed window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 13:45:02,254 - INFO - Closed window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 13:45:03,288 - INFO - Closed window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 13:45:04,321 - INFO - Closed window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 13:45:05,343 - INFO - Closed window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 18:17:08,002 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 18:17:15,984 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 18:17:52,299 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 18:18:00,077 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 18:18:09,197 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 18:18:09,197 - INFO - All windows opened
+2025-08-06 18:18:17,202 - INFO - Arranging windows...
+2025-08-06 18:18:17,480 - INFO - Windows arranged successfully
+2025-08-06 18:51:38,404 - INFO - [f2ec5867197d408f83d06d9f70125deb] 统计信息 - 总视频数: 250, 点赞: 14/23, 订阅: 4/8
+2025-08-06 18:54:12,920 - INFO - [1756dcfa03fd4c78ad8cdbeb9e2e39d8] 统计信息 - 总视频数: 250, 点赞: 22/22, 订阅: 6/12
+2025-08-06 18:54:14,052 - INFO - [a5bb029c4c1347fbaa2cb18932eaa68b] 统计信息 - 总视频数: 250, 点赞: 16/23, 订阅: 6/9
+2025-08-06 18:54:53,196 - INFO - [8f08e651e8194598b5578dc50d2010aa] 统计信息 - 总视频数: 250, 点赞: 22/22, 订阅: 11/13
+2025-08-06 18:56:17,136 - INFO - [7c7d16093535417889bf61dcaf1173cc] 统计信息 - 总视频数: 250, 点赞: 20/25, 订阅: 7/12
+2025-08-06 18:56:18,162 - INFO - Closed window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 18:56:19,195 - INFO - Closed window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 18:56:20,231 - INFO - Closed window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 18:56:21,259 - INFO - Closed window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 18:56:22,302 - INFO - Closed window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 21:23:11,216 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 21:23:19,840 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 21:24:42,317 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 21:24:44,583 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 21:24:46,850 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 21:24:59,151 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 21:25:10,850 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 21:25:10,850 - INFO - All windows opened
+2025-08-06 21:25:18,859 - INFO - Arranging windows...
+2025-08-06 21:25:19,136 - INFO - Windows arranged successfully
+2025-08-06 21:26:04,995 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-06 21:26:07,317 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-06 21:26:09,626 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-06 21:26:11,936 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-06 21:26:14,272 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-06 21:26:14,272 - INFO - All windows opened
+2025-08-06 21:26:22,286 - INFO - Arranging windows...
+2025-08-06 21:26:22,594 - INFO - Windows arranged successfully
+2025-08-07 09:16:51,557 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-07 09:16:53,868 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-07 09:35:49,448 - INFO - Successfully opened window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-07 09:35:51,725 - INFO - Successfully opened window f2ec5867197d408f83d06d9f70125deb
+2025-08-07 09:36:29,027 - INFO - Successfully opened window 8f08e651e8194598b5578dc50d2010aa
+2025-08-07 09:36:31,358 - INFO - Successfully opened window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-07 09:36:33,699 - INFO - Successfully opened window 7c7d16093535417889bf61dcaf1173cc
+2025-08-07 09:36:33,699 - INFO - All windows opened
+2025-08-07 09:36:41,701 - INFO - Arranging windows...
+2025-08-07 09:36:42,001 - INFO - Windows arranged successfully
+2025-08-07 09:36:52,944 - ERROR - Bot error for window f2ec5867197d408f83d06d9f70125deb: Page.goto: net::ERR_FAILED at https://www.youtube.com/shorts
+Call log:
+  - navigating to "https://www.youtube.com/shorts", waiting until "load"
+
+2025-08-07 10:40:39,322 - INFO - [8f08e651e8194598b5578dc50d2010aa] 统计信息 - 总视频数: 500, 点赞: 58/58, 订阅: 17/22
+2025-08-07 10:42:50,276 - INFO - [7c7d16093535417889bf61dcaf1173cc] 统计信息 - 总视频数: 500, 点赞: 39/46, 订阅: 17/28
+2025-08-07 10:45:53,795 - INFO - [1756dcfa03fd4c78ad8cdbeb9e2e39d8] 统计信息 - 总视频数: 500, 点赞: 33/36, 订阅: 9/22
+2025-08-07 10:53:26,561 - INFO - [a5bb029c4c1347fbaa2cb18932eaa68b] 统计信息 - 总视频数: 500, 点赞: 21/29, 订阅: 8/13
+2025-08-07 10:53:27,624 - INFO - Closed window 1756dcfa03fd4c78ad8cdbeb9e2e39d8
+2025-08-07 10:53:28,824 - INFO - Closed window f2ec5867197d408f83d06d9f70125deb
+2025-08-07 10:53:29,867 - INFO - Closed window 8f08e651e8194598b5578dc50d2010aa
+2025-08-07 10:53:30,986 - INFO - Closed window a5bb029c4c1347fbaa2cb18932eaa68b
+2025-08-07 10:53:32,011 - INFO - Closed window 7c7d16093535417889bf61dcaf1173cc
+2025-08-07 21:01:29,737 - ERROR - Failed to open window 1756dcfa03fd4c78ad8cdbeb9e2e39d8: {'success': False, 'msg': 'token 失效，请检查登录状态'}
+2025-08-07 21:01:31,752 - ERROR - Failed to open window f2ec5867197d408f83d06d9f70125deb: {'success': False, 'msg': 'token 失效，请检查登录状态'}
+2025-08-07 21:01:33,768 - ERROR - Failed to open window 8f08e651e8194598b5578dc50d2010aa: {'success': False, 'msg': 'token 失效，请检查登录状态'}
+2025-08-07 21:01:35,780 - ERROR - Failed to open window a5bb029c4c1347fbaa2cb18932eaa68b: {'success': False, 'msg': 'token 失效，请检查登录状态'}
+2025-08-07 21:01:37,797 - ERROR - Failed to open window 7c7d16093535417889bf61dcaf1173cc: {'success': False, 'msg': 'token 失效，请检查登录状态'}
+2025-08-07 21:01:37,798 - INFO - All windows opened
+2025-08-07 21:01:45,811 - INFO - Arranging windows...
+2025-08-07 21:01:45,855 - INFO - Windows arranged successfully
+2025-08-07 21:01:48,858 - ERROR - Window 1756dcfa03fd4c78ad8cdbeb9e2e39d8 not found in manager
+2025-08-07 21:01:48,859 - ERROR - Window f2ec5867197d408f83d06d9f70125deb not found in manager
+2025-08-07 21:01:48,859 - ERROR - Window 8f08e651e8194598b5578dc50d2010aa not found in manager
+2025-08-07 21:01:48,859 - ERROR - Window a5bb029c4c1347fbaa2cb18932eaa68b not found in manager
+2025-08-07 21:01:48,859 - ERROR - Window 7c7d16093535417889bf61dcaf1173cc not found in manager
+2025-08-07 21:01:48,860 - ERROR - No tasks created, all windows failed to open
