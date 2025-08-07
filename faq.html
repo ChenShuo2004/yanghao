@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>常见问题 - YouTube Shorts 自动化工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        ↑
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">YouTube Bot</div>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="home.html">首页</a></li>
+                    <li><a href="features.html">功能特点</a></li>
+                    <li><a href="config-guide.html">配置说明</a></li>
+                    <li><a href="online-config.html">在线配置</a></li>
+                    <li><a href="stats.html">项目统计</a></li>
+                    <li><a href="faq.html" class="active">常见问题</a></li>
+                    <li><a href="feedback.html">讨论反馈</a></li>
+                    <li><a href="scheduler.html">任务调度</a></li>
+                    <li><a href="download.html">下载</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- FAQ Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>常见问题</h1>
+                <p>解答您在使用 YouTube Shorts 自动化工具过程中可能遇到的问题</p>
+                <div class="search-box">
+                    <input type="text" id="faq-search" placeholder="搜索问题...">
+                    <button onclick="searchFAQ()">🔍</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Categories -->
+        <section class="faq-categories">
+            <div class="container">
+                <div class="category-tabs">
+                    <button class="tab-btn active" onclick="showCategory('general')">常规问题</button>
+                    <button class="tab-btn" onclick="showCategory('installation')">安装配置</button>
+                    <button class="tab-btn" onclick="showCategory('usage')">使用问题</button>
+                    <button class="tab-btn" onclick="showCategory('troubleshooting')">故障排除</button>
+                    <button class="tab-btn" onclick="showCategory('advanced')">高级功能</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Content -->
+        <section class="faq-content">
+            <div class="container">
+                <!-- General Questions -->
+                <div class="faq-category" id="general">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>这个工具是做什么的？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>YouTube Shorts 自动化工具是一个用于自动化观看、点赞和订阅 YouTube Shorts 视频的 Python 程序。它可以帮助您自动化这些重复性操作，提高效率。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>使用这个工具安全吗？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>工具使用了随机等待时间和模拟人类行为的方式来降低被检测的风险。但是，任何自动化工具都存在一定风险，请谨慎使用并遵守 YouTube 的服务条款。</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>支持哪些操作系统？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>工具支持 Windows、macOS 和 Linux 系统。需要 Python 3.7 或更高版本。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Installation Questions -->
+                <div class="faq-category" id="installation" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>如何安装依赖？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>运行以下命令安装所需依赖：</p>
+                            <div class="code-block">
+                                <code>pip install -r requirements.txt</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>BitBrowser 是什么？如何配置？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>BitBrowser 是一个浏览器管理工具，用于创建和管理多个浏览器实例。您需要：</p>
+                            <ol>
+                                <li>下载并安装 BitBrowser</li>
+                                <li>获取 API 密钥</li>
+                                <li>在 config.json 中配置浏览器 ID</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage Questions -->
+                <div class="faq-category" id="usage" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>如何启动程序？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>有两种启动方式：</p>
+                            <div class="code-block">
+                                <code># 直接运行<br>python main.py<br><br># 使用调度器<br>python scheduler.py</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>如何修改配置？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>编辑 config.json 文件来修改配置，包括：</p>
+                            <ul>
+                                <li>浏览器 ID 列表</li>
+                                <li>窗口大小设置</li>
+                                <li>观看时间范围</li>
+                                <li>点赞和订阅概率</li>
+                                <li>滚动次数</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting Questions -->
+                <div class="faq-category" id="troubleshooting" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>程序无法启动怎么办？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>请检查以下几点：</p>
+                            <ol>
+                                <li>确保已安装所有依赖</li>
+                                <li>检查 Python 版本（需要 3.7+）</li>
+                                <li>验证 config.json 格式是否正确</li>
+                                <li>查看 error.log 文件获取详细错误信息</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>浏览器无法打开怎么办？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>可能的解决方案：</p>
+                            <ul>
+                                <li>检查 BitBrowser 是否正在运行</li>
+                                <li>验证浏览器 ID 是否正确</li>
+                                <li>确保 API 密钥有效</li>
+                                <li>重启 BitBrowser 服务</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Questions -->
+                <div class="faq-category" id="advanced" style="display: none;">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>如何自定义 XPath 选择器？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>编辑 xpath_config.json 文件来自定义选择器：</p>
+                            <div class="code-block">
+                                <code>{
+  "like_button": "//button[@aria-label='赞']",
+  "subscribe_button": "//button[contains(text(), '订阅')]"
+}</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <h3>如何设置调度任务？</h3>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>编辑 scheduler_config.json 文件来配置调度：</p>
+                            <ul>
+                                <li>设置运行时间间隔</li>
+                                <li>配置每日运行时间</li>
+                                <li>设置最大运行时长</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="container">
+                <h2>没有找到答案？</h2>
+                <p>如果您的问题没有在上面找到答案，请通过以下方式联系我们：</p>
+                <div class="contact-options">
+                    <a href="feedback.html" class="btn btn-primary">提交反馈</a>
+                    <a href="mailto:support@example.com" class="btn btn-secondary">发送邮件</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>YouTube Bot</h3>
+                    <p>专业的 YouTube Shorts 自动化工具</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="home.html">首页</a></li>
+                        <li><a href="features.html">功能特点</a></li>
+                        <li><a href="download.html">下载</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="faq.html">常见问题</a></li>
+                        <li><a href="feedback.html">讨论反馈</a></li>
+                        <li><a href="config-guide.html">配置指南</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 YouTube Bot. 保留所有权利。</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

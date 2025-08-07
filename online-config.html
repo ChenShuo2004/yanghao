@@ -32,6 +32,9 @@
                     <li><a href="config-guide.html" class="nav-link">配置说明</a></li>
                     <li><a href="online-config.html" class="nav-link active">在线配置</a></li>
                     <li><a href="stats.html" class="nav-link">项目统计</a></li>
+                    <li><a href="faq.html" class="nav-link">常见问题</a></li>
+                    <li><a href="feedback.html" class="nav-link">讨论反馈</a></li>
+                    <li><a href="scheduler.html" class="nav-link">任务调度</a></li>
                     <li><a href="download.html" class="nav-link">下载</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -46,8 +49,8 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>在线配置工具</h1>
-            <p>通过可视化界面轻松配置您的YouTube自动化机器人</p>
+            <h1>统一配置中心</h1>
+            <p>通过可视化界面轻松配置您的YouTube自动化机器人参数和调度任务</p>
         </div>
     </section>
 
@@ -145,6 +148,76 @@
                         </div>
                     </div>
 
+                    <h3>任务调度设置</h3>
+                    <div class="form-group">
+                        <div class="scheduler-status">
+                            <div class="status-indicator">
+                                <span class="status-dot" id="schedulerStatusDot"></span>
+                                <span id="schedulerStatusText">调度器状态: 未知</span>
+                            </div>
+                            <div class="scheduler-controls">
+                                <button class="btn btn-sm btn-success" onclick="startScheduler()">启动调度器</button>
+                                <button class="btn btn-sm btn-danger" onclick="stopScheduler()">停止调度器</button>
+                                <button class="btn btn-sm btn-primary" onclick="runOnce()">立即运行</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>快速调度预设:</label>
+                        <div class="schedule-presets">
+                            <button class="btn btn-preset" onclick="applyPreset('daily')">每日运行</button>
+                            <button class="btn btn-preset" onclick="applyPreset('workdays')">工作日运行</button>
+                            <button class="btn btn-preset" onclick="applyPreset('hourly')">每小时运行</button>
+                            <button class="btn btn-preset" onclick="applyPreset('weekly')">每周运行</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleType">调度类型:</label>
+                        <select id="scheduleType" onchange="updateScheduleForm()">
+                            <option value="daily">每日调度</option>
+                            <option value="hourly">每小时调度</option>
+                            <option value="weekly">每周调度</option>
+                            <option value="interval">间隔调度</option>
+                        </select>
+                    </div>
+                    <div id="scheduleFormContainer">
+                        <div id="dailyForm" class="schedule-form">
+                            <label for="dailyTime">运行时间:</label>
+                            <input type="time" id="dailyTime" value="09:00">
+                        </div>
+                        <div id="hourlyForm" class="schedule-form" style="display: none;">
+                            <label for="hourlyMinute">每小时第几分钟运行:</label>
+                            <input type="number" id="hourlyMinute" min="0" max="59" value="0">
+                        </div>
+                        <div id="weeklyForm" class="schedule-form" style="display: none;">
+                            <label for="weeklyDay">星期几:</label>
+                            <select id="weeklyDay">
+                                <option value="monday">星期一</option>
+                                <option value="tuesday">星期二</option>
+                                <option value="wednesday">星期三</option>
+                                <option value="thursday">星期四</option>
+                                <option value="friday">星期五</option>
+                                <option value="saturday">星期六</option>
+                                <option value="sunday">星期日</option>
+                            </select>
+                            <label for="weeklyTime">运行时间:</label>
+                            <input type="time" id="weeklyTime" value="09:00">
+                        </div>
+                        <div id="intervalForm" class="schedule-form" style="display: none;">
+                            <label for="intervalMinutes">间隔时间(分钟):</label>
+                            <input type="number" id="intervalMinutes" min="1" max="1440" value="60">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" onclick="addSchedule()">➕ 添加调度任务</button>
+                    </div>
+                    <div class="form-group">
+                        <label>当前调度任务:</label>
+                        <div id="scheduleList" class="schedule-list">
+                            <!-- 调度任务列表将在这里显示 -->
+                        </div>
+                    </div>
+
                     <h3>文件操作</h3>
                     <div class="form-group">
                         <label for="configFile">上传现有配置文件:</label>
@@ -154,6 +227,7 @@
                         <button class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
                         <button class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
                         <button class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
+                        <button class="btn btn-success" onclick="saveSchedulerConfig()">💾 保存调度配置</button>
                     </div>
                 </div>
                 <div class="config-preview">
@@ -217,6 +291,15 @@
                         <li><strong>滚动模式：</strong>不同的页面滚动行为模式</li>
                         <li><strong>用户画像：</strong>模拟不同类型用户的行为特征</li>
                         <li><strong>高级交互：</strong>暂停、重播、评论浏览等功能</li>
+                    </ul>
+                </div>
+                <div class="help-item">
+                    <h3>⏰ 任务调度</h3>
+                    <ul>
+                        <li><strong>调度类型：</strong>支持每日、每小时、每周、间隔调度</li>
+                        <li><strong>快速预设：</strong>提供常用的调度模板</li>
+                        <li><strong>任务管理：</strong>启用/禁用、编辑、删除调度任务</li>
+                        <li><strong>状态监控：</strong>实时显示调度器运行状态</li>
                     </ul>
                 </div>
             </div>

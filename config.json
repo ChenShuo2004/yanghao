@@ -24,6 +24,6 @@
         "watch_time_max": 60,
         "like_probability": 0.1,
         "subscribe_probability": 0.05,
-        "scroll_count": 1000
+        "scroll_count": 500
     }
 }

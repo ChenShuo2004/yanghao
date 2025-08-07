@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>任务调度器 - RPA自动化工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">加载中...</div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="回到顶部">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">RPA自动化工具</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="home.html">首页</a></li>
+                <li><a href="features.html">功能特性</a></li>
+                <li><a href="config-guide.html">配置指南</a></li>
+                <li><a href="online-config.html">在线配置</a></li>
+                <li><a href="stats.html">项目统计</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="feedback.html">讨论反馈</a></li>
+                <li><a href="scheduler.html" class="active">任务调度</a></li>
+                <li><a href="download.html">下载</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="scheduler-hero">
+            <div class="container">
+                <h1 class="hero-title">任务调度器</h1>
+                <p class="hero-description">设置自动运行时间，让RPA工具按照您的需求定时执行</p>
+                <div class="scheduler-status">
+                    <div class="status-item">
+                        <span class="status-label">调度器状态:</span>
+                        <span class="status-value" id="schedulerStatus">未知</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">下次运行:</span>
+                        <span class="status-value" id="nextRun">未设置</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scheduler Control -->
+        <section class="scheduler-control">
+            <div class="container">
+                <div class="control-panel">
+                    <div class="control-buttons">
+                        <button class="btn btn-primary" id="startScheduler">
+                            <span class="btn-icon">▶️</span>
+                            启动调度器
+                        </button>
+                        <button class="btn btn-secondary" id="stopScheduler">
+                            <span class="btn-icon">⏹️</span>
+                            停止调度器
+                        </button>
+                        <button class="btn btn-accent" id="runOnce">
+                            <span class="btn-icon">🚀</span>
+                            立即运行一次
+                        </button>
+                        <button class="btn btn-outline" id="refreshStatus">
+                            <span class="btn-icon">🔄</span>
+                            刷新状态
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schedule Configuration -->
+        <section class="schedule-config">
+            <div class="container">
+                <h2 class="section-title">调度配置</h2>
+                
+                <!-- Quick Presets -->
+                <div class="quick-presets">
+                    <h3>快速预设</h3>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="daily-3">
+                            <span class="preset-icon">📅</span>
+                            <span class="preset-title">每日3次</span>
+                            <span class="preset-desc">9:00, 14:00, 20:00</span>
+                        </button>
+                        <button class="preset-btn" data-preset="hourly-2">
+                            <span class="preset-icon">⏰</span>
+                            <span class="preset-title">每2小时</span>
+                            <span class="preset-desc">全天候运行</span>
+                        </button>
+                        <button class="preset-btn" data-preset="weekly">
+                            <span class="preset-icon">📆</span>
+                            <span class="preset-title">每周运行</span>
+                            <span class="preset-desc">周一到周五</span>
+                        </button>
+                        <button class="preset-btn" data-preset="custom">
+                            <span class="preset-icon">⚙️</span>
+                            <span class="preset-title">自定义</span>
+                            <span class="preset-desc">手动配置</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Schedule List -->
+                <div class="schedule-list">
+                    <div class="list-header">
+                        <h3>当前调度任务</h3>
+                        <button class="btn btn-small btn-primary" id="addSchedule">
+                            <span class="btn-icon">➕</span>
+                            添加任务
+                        </button>
+                    </div>
+                    <div class="schedule-items" id="scheduleItems">
+                        <!-- Schedule items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Add/Edit Schedule Form -->
+                <div class="schedule-form-overlay" id="scheduleFormOverlay">
+                    <div class="schedule-form">
+                        <div class="form-header">
+                            <h3 id="formTitle">添加调度任务</h3>
+                            <button class="close-btn" id="closeForm">&times;</button>
+                        </div>
+                        <form id="scheduleForm">
+                            <div class="form-group">
+                                <label for="scheduleName">任务名称</label>
+                                <input type="text" id="scheduleName" name="name" required placeholder="输入任务名称">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="scheduleDescription">任务描述</label>
+                                <input type="text" id="scheduleDescription" name="description" placeholder="输入任务描述（可选）">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="scheduleType">调度类型</label>
+                                <select id="scheduleType" name="type" required>
+                                    <option value="daily">每日运行</option>
+                                    <option value="hourly">每小时运行</option>
+                                    <option value="weekly">每周运行</option>
+                                    <option value="interval">间隔运行</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Daily Schedule Options -->
+                            <div class="schedule-options" id="dailyOptions">
+                                <div class="form-group">
+                                    <label for="dailyTime">运行时间</label>
+                                    <input type="time" id="dailyTime" name="time">
+                                </div>
+                            </div>
+                            
+                            <!-- Hourly Schedule Options -->
+                            <div class="schedule-options" id="hourlyOptions" style="display: none;">
+                                <div class="form-group">
+                                    <label for="hourlyInterval">间隔小时数</label>
+                                    <input type="number" id="hourlyInterval" name="interval" min="1" max="24" value="1">
+                                </div>
+                            </div>
+                            
+                            <!-- Weekly Schedule Options -->
+                            <div class="schedule-options" id="weeklyOptions" style="display: none;">
+                                <div class="form-group">
+                                    <label for="weeklyDay">星期几</label>
+                                    <select id="weeklyDay" name="day">
+                                        <option value="monday">星期一</option>
+                                        <option value="tuesday">星期二</option>
+                                        <option value="wednesday">星期三</option>
+                                        <option value="thursday">星期四</option>
+                                        <option value="friday">星期五</option>
+                                        <option value="saturday">星期六</option>
+                                        <option value="sunday">星期日</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="weeklyTime">运行时间</label>
+                                    <input type="time" id="weeklyTime" name="time">
+                                </div>
+                            </div>
+                            
+                            <!-- Interval Schedule Options -->
+                            <div class="schedule-options" id="intervalOptions" style="display: none;">
+                                <div class="form-group">
+                                    <label for="intervalMinutes">间隔分钟数</label>
+                                    <input type="number" id="intervalMinutes" name="interval" min="1" max="1440" value="30">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="scheduleEnabled" name="enabled" checked>
+                                    <span class="checkmark"></span>
+                                    启用此任务
+                                </label>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelForm">取消</button>
+                                <button type="submit" class="btn btn-primary">保存任务</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Scheduler Logs -->
+        <section class="scheduler-logs">
+            <div class="container">
+                <div class="logs-header">
+                    <h2 class="section-title">运行日志</h2>
+                    <div class="logs-controls">
+                        <button class="btn btn-small btn-outline" id="refreshLogs">
+                            <span class="btn-icon">🔄</span>
+                            刷新日志
+                        </button>
+                        <button class="btn btn-small btn-outline" id="clearLogs">
+                            <span class="btn-icon">🗑️</span>
+                            清空日志
+                        </button>
+                    </div>
+                </div>
+                <div class="logs-container">
+                    <div class="logs-content" id="logsContent">
+                        <div class="log-entry">
+                            <span class="log-time">2024-01-15 09:00:00</span>
+                            <span class="log-level info">INFO</span>
+                            <span class="log-message">调度器启动成功</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-time">2024-01-15 09:00:01</span>
+                            <span class="log-level info">INFO</span>
+                            <span class="log-message">加载调度配置: 3个任务</span>
+                        </div>
+                        <div class="log-entry">
+                            <span class="log-time">2024-01-15 09:00:02</span>
+                            <span class="log-level success">SUCCESS</span>
+                            <span class="log-message">任务调度设置完成</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RPA自动化工具</h3>
+                    <p>让重复性工作自动化，提升工作效率</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="home.html">首页</a></li>
+                        <li><a href="features.html">功能特性</a></li>
+                        <li><a href="config-guide.html">配置指南</a></li>
+                        <li><a href="download.html">下载</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>支持</h4>
+                    <ul>
+                        <li><a href="faq.html">常见问题</a></li>
+                        <li><a href="feedback.html">反馈建议</a></li>
+                        <li><a href="#">技术支持</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 RPA自动化工具. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Scheduler-specific JavaScript will be added here
+        document.addEventListener('DOMContentLoaded', function() {
+            initScheduler();
+        });
+    </script>
+</body>
+</html>
