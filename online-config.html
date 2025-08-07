@@ -100,7 +100,7 @@
                                 <button type="button" class="btn-remove" onclick="removeBrowserId(this)">❌</button>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-secondary" onclick="addBrowserId()">➕ 添加浏览器ID</button>
+                        <button type="button" id="add-browser-id" class="btn btn-secondary" onclick="addBrowserId()">➕ 添加浏览器ID</button>
                     </div>
 
                     <h3>用户行为模拟设置</h3>
@@ -221,12 +221,12 @@
                     <h3>文件操作</h3>
                     <div class="form-group">
                         <label for="configFile">上传现有配置文件:</label>
-                        <input type="file" id="configFile" accept=".json" onchange="loadConfig(event)">
+                        <input type="file" id="config-file" accept=".json" onchange="loadConfig(event)">
                     </div>
                     <div class="form-actions">
-                        <button class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
-                        <button class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
-                        <button class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
+                        <button id="generate-config" class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
+                        <button id="download-config" class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
+                        <button id="reset-config" class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
                         <button class="btn btn-success" onclick="saveSchedulerConfig()">💾 保存调度配置</button>
                     </div>
                 </div>

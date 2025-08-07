@@ -373,7 +373,7 @@ class ConfigManager {
     }
 
     updateBrowserIdsList() {
-        const container = document.getElementById('browser-ids-container');
+        const container = document.getElementById('browserIdContainer');
         if (!container) return;
         
         container.innerHTML = '';
