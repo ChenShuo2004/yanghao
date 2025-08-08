@@ -100,8 +100,8 @@ def openBrowser(id):
         # 从配置文件读取窗口大小
         with open('config.json', 'r') as f:
             config = json.load(f)
-        window_width = config['settings']['window_width']
-        window_height = config['settings']['window_height']
+        window_width = config['window']['width']
+        window_height = config['window']['height']
         
         # 设置窗口尺寸
         size_data = {
@@ -156,8 +156,8 @@ def arrangeWindows():
         # 从配置文件读取窗口大小
         with open('config.json', 'r') as f:
             config = json.load(f)
-        window_width = config['settings']['window_width']
-        window_height = config['settings']['window_height']
+        window_width = config['window']['width']
+        window_height = config['window']['height']
         
         json_data = {
             "type": "box",

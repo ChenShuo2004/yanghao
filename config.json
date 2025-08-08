@@ -1,29 +1,30 @@
 {
-    "windows": [
-        {
-            "browser_id": "1756dcfa03fd4c78ad8cdbeb9e2e39d8"
-        },
-        {
-            "browser_id": "f2ec5867197d408f83d06d9f70125deb"
-
-        },
-        {
-            "browser_id": "8f08e651e8194598b5578dc50d2010aa"
-        },
-        {
-            "browser_id": "a5bb029c4c1347fbaa2cb18932eaa68b"
-        },
-       {
-            "browser_id": "7c7d16093535417889bf61dcaf1173cc"
-        }
-    ],
-    "settings": {
-        "window_width": 400,
-        "window_height": 600,
-        "watch_time_min": 5,
-        "watch_time_max": 60,
-        "like_probability": 0.1,
-        "subscribe_probability": 0.05,
-        "scroll_count": 500
-    }
+  "window": {
+    "width": 1280,
+    "height": 720
+  },
+  "times": {
+    "watch_time_min": 30,
+    "watch_time_max": 180,
+    "like_delay_min": 5,
+    "like_delay_max": 15,
+    "subscribe_delay_min": 10,
+    "subscribe_delay_max": 25
+  },
+  "probabilities": {
+    "like_probability": 0.7,
+    "subscribe_probability": 0.3,
+    "comment_probability": 0.1
+  },
+  "behavior": {
+    "scroll_count": 3,
+    "mouse_speed": "medium",
+    "scroll_pattern": "natural",
+    "pause_probability": 0.2,
+    "replay_probability": 0.1
+  },
+  "browser_ids": [
+    "default"
+  ],
+  "user_persona": "casual_viewer"
 }

@@ -134,7 +134,7 @@ async def main():
                 ws_endpoint = window_manager.windows[browser_id]['ws']
                 
                 # 创建异步任务
-                task = asyncio.create_task(init_and_run_bot(browser_id, ws_endpoint, config['settings']))
+                task = asyncio.create_task(init_and_run_bot(browser_id, ws_endpoint, config))
                 tasks.append(task)
             else:
                 logging.error(f'Window {browser_id} not found in manager')
@@ -183,12 +183,12 @@ async def open_browser(browser_id, window_manager):
     except Exception as e:
         logging.error(f'Error opening window {browser_id}: {str(e)}')
 
-async def init_and_run_bot(browser_id, ws_endpoint, settings):
+async def init_and_run_bot(browser_id, ws_endpoint, config):
     """初始化并运行机器人"""
     try:
         bot = YouTubeBot(browser_id, ws_endpoint)
         await bot.init()
-        await bot.watch_shorts(settings)
+        await bot.watch_shorts(config)
     except Exception as e:
         logging.error(f"Bot error for window {browser_id}: {str(e)}")
 

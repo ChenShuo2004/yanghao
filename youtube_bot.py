@@ -130,8 +130,8 @@ class YouTubeBot:
             # 加载配置文件获取窗口大小
             with open('config.json', 'r') as f:
                 config = json.load(f)
-            window_width = config['settings']['window_width']
-            window_height = config['settings']['window_height']
+            window_width = config['window']['width']
+            window_height = config['window']['height']
             
             # 设置视口大小为配置文件中指定的大小
             await self.page.set_viewport_size({"width": window_width, "height": window_height})
@@ -154,16 +154,14 @@ class YouTubeBot:
             print(f"[{self.browser_id}] 初始化失败: {str(e)}")
             raise
     
-    async def watch_shorts(self, settings):
+    async def watch_shorts(self, config):
         """浏览 Shorts 视频并进行互动
         
         Args:
-            settings: 包含互动配置的字典
-                - watch_time_min: 最短观看时间
-                - watch_time_max: 最长观看时间
-                - like_probability: 点赞概率
-                - subscribe_probability: 订阅概率
-                - scroll_count: 观看视频数量
+            config: 包含完整配置的字典
+                - times: 时间相关配置
+                - probabilities: 概率相关配置
+                - behavior: 行为相关配置
         """
         try:
             print(f"[{self.browser_id}] 开始浏览Shorts视频")
@@ -171,16 +169,23 @@ class YouTubeBot:
             # 确保页面已加载
             await self.random_delay(3, 6)
             
+            # 从配置中提取参数
+            scroll_count = config['behavior']['scroll_count']
+            watch_time_min = config['times']['watch_time_min']
+            watch_time_max = config['times']['watch_time_max']
+            like_probability = config['probabilities']['like_probability']
+            subscribe_probability = config['probabilities']['subscribe_probability']
+            
             # 循环观看视频
-            for i in range(settings['scroll_count']):
+            for i in range(scroll_count):
                 try:
-                    print(f"\n[{self.browser_id}] === 正在观看第 {i+1}/{settings['scroll_count']} 个视频 ===")
+                    print(f"\n[{self.browser_id}] === 正在观看第 {i+1}/{scroll_count} 个视频 ===")
                     self.stats['total_videos'] += 1
                     
                     # 随机观看时长
                     watch_time = random.uniform(
-                        settings['watch_time_min'],
-                        settings['watch_time_max']
+                        watch_time_min,
+                        watch_time_max
                     )
                     print(f"[{self.browser_id}] 观看时长: {int(watch_time)}秒")
                     
@@ -189,7 +194,7 @@ class YouTubeBot:
                     await self.simulate_human_watch(watch_time)  # 模拟观看行为
                     
                     # 随机点赞
-                    if random.random() < settings['like_probability']:
+                    if random.random() < like_probability:
                         # 先移动鼠标到点赞按钮附近
                         like_button = self.page.locator(self.xpath_config['like_button']).nth(0)
                         if await like_button.count() > 0:
@@ -204,7 +209,7 @@ class YouTubeBot:
                             self.stats['likes']['failed'] += 1
                     
                     # 随机订阅
-                    if random.random() < settings['subscribe_probability']:
+                    if random.random() < subscribe_probability:
                         print(f"[{self.browser_id}] 检查订阅状态...")
                         # 先检查订阅按钮状态
                         sub_status = await self.page.evaluate(f"""

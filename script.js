@@ -237,9 +237,8 @@ class ConfigManager {
             user_persona: 'casual_viewer'
         };
         
-        this.initializeForm();
+        this.loadConfigFromServer();
         this.bindEvents();
-        this.updatePreview();
     }
 
     initializeForm() {
@@ -305,11 +304,31 @@ class ConfigManager {
         const rangeInputs = document.querySelectorAll('input[type="range"]');
         rangeInputs.forEach(input => {
             input.addEventListener('input', (e) => {
-                const display = document.getElementById(e.target.id + '-display');
+                const inputId = e.target.id;
+                const value = parseFloat(e.target.value);
+                
+                // Try different display element naming patterns
+                let display = document.getElementById(inputId + '-display');
+                if (!display) {
+                    display = document.getElementById(inputId + 'Value');
+                }
+                
                 if (display) {
-                    display.textContent = e.target.value;
+                    // Format the display value based on the input type
+                    if (inputId.includes('Probability')) {
+                        display.textContent = Math.round(value * 100) + '%';
+                    } else if (inputId === 'mouseSpeed') {
+                        const speedLabels = { 0.5: '慢速', 1: '正常', 1.5: '快速', 2: '很快', 2.5: '极快', 3: '最快' };
+                        display.textContent = speedLabels[value] || '自定义';
+                    } else {
+                        display.textContent = value;
+                    }
                 }
             });
+            
+            // Initialize display values on page load
+            const event = new Event('input');
+            input.dispatchEvent(event);
         });
 
         // Button events
@@ -397,7 +416,12 @@ class ConfigManager {
 
     updateBrowserIdsFromForm() {
         const inputs = document.querySelectorAll('.browser-id-input');
-        this.config.browser_ids = Array.from(inputs).map(input => input.value || 'default');
+        this.config.browser_ids = Array.from(inputs).map(input => input.value).filter(value => value.trim() !== '');
+        // 如果没有有效的浏览器ID，保持原有的配置
+        if (this.config.browser_ids.length === 0) {
+            // 从config.json重新加载浏览器ID
+            this.loadConfigFromServer();
+        }
     }
 
     addBrowserId() {
@@ -492,6 +516,25 @@ class ConfigManager {
         } else {
             this.showNotification('请选择有效的JSON文件！', 'error');
         }
+    }
+
+    async loadConfigFromServer() {
+        try {
+            const response = await fetch('/config.json');
+            if (response.ok) {
+                const serverConfig = await response.json();
+                // 合并服务器配置到当前配置
+                this.config = { ...this.config, ...serverConfig };
+                console.log('从服务器加载配置成功:', this.config);
+            } else {
+                console.log('无法从服务器加载配置，使用默认配置');
+            }
+        } catch (error) {
+            console.log('加载服务器配置时出错，使用默认配置:', error);
+        }
+        
+        this.initializeForm();
+        this.updatePreview();
     }
 
     showNotification(message, type = 'info') {
@@ -1591,3 +1634,545 @@ if (document.getElementById('scheduleType')) {
         }
     });
 }
+
+// Execution Control Panel
+class ExecutionController {
+    constructor() {
+        this.apiBaseUrl = 'http://localhost:5000/api';
+        this.status = 'stopped';
+        this.stats = {
+            videosWatched: 0,
+            likesGiven: 0,
+            subscriptionsGiven: 0,
+            commentsGiven: 0,
+            pauseCount: 0,
+            replayCount: 0,
+            scrollCount: 0,
+            runtime: 0,
+            avgWatchTime: 0
+        };
+        this.logs = [];
+        this.statusCheckInterval = null;
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.updateUI();
+        this.checkApiStatus();
+    }
+
+    bindEvents() {
+        const startBtn = document.getElementById('startBot');
+        const stopBtn = document.getElementById('stopBot');
+        const checkApiBtn = document.getElementById('checkApi');
+        const createBrowserBtn = document.getElementById('createBrowser');
+        const clearLogsBtn = document.getElementById('clearLogs');
+
+        if (startBtn) {
+            startBtn.addEventListener('click', () => this.startBot());
+        }
+        if (stopBtn) {
+            stopBtn.addEventListener('click', () => this.stopBot());
+        }
+        if (checkApiBtn) {
+            checkApiBtn.addEventListener('click', () => this.checkApiStatus());
+        }
+        if (createBrowserBtn) {
+            createBrowserBtn.addEventListener('click', () => this.createBrowser());
+        }
+        if (clearLogsBtn) {
+            clearLogsBtn.addEventListener('click', () => this.clearLogs());
+        }
+    }
+
+    async makeApiCall(endpoint, method = 'GET', data = null) {
+        try {
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            };
+            
+            if (data) {
+                options.body = JSON.stringify(data);
+            }
+
+            const response = await fetch(`${this.apiBaseUrl}${endpoint}`, options);
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+            return await response.json();
+        } catch (error) {
+            let errorMessage = `API调用失败: ${error.message}`;
+            let userGuidance = '';
+            
+            // 根据错误类型提供具体的用户指导
+            if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                errorMessage = 'API服务器连接失败';
+                userGuidance = '请检查：\n1. Web API服务是否正在运行 (python web_api.py)\n2. 端口5000是否被占用\n3. 防火墙设置是否阻止连接';
+            } else if (error.message.includes('HTTP 404')) {
+                errorMessage = 'API接口不存在';
+                userGuidance = '请确认API服务版本是否正确';
+            } else if (error.message.includes('HTTP 500')) {
+                errorMessage = 'API服务器内部错误';
+                userGuidance = '请检查服务器日志，可能需要重启API服务';
+            } else if (error.message.includes('HTTP 403')) {
+                errorMessage = 'API访问被拒绝';
+                userGuidance = '请检查API服务配置和权限设置';
+            }
+            
+            this.addLog('error', errorMessage);
+            if (userGuidance) {
+                this.addLog('warning', userGuidance);
+                this.showErrorDialog(errorMessage, userGuidance);
+            }
+            
+            return { success: false, error: errorMessage, guidance: userGuidance };
+        }
+    }
+
+    async checkApiStatus() {
+        this.addLog('info', '检查API状态...');
+        const result = await this.makeApiCall('/status');
+        
+        const apiStatusEl = document.getElementById('apiStatus');
+        if (apiStatusEl) {
+            if (result.success) {
+                apiStatusEl.textContent = '可用';
+                apiStatusEl.className = 'api-status available';
+                this.addLog('success', 'API连接正常');
+                
+                // 检查浏览器API状态
+                if (result.data && result.data.browser_api_status === false) {
+                    this.addLog('warning', 'Bit Browser API未运行，请启动Bit Browser客户端');
+                    this.showErrorDialog('浏览器API未运行', '请按以下步骤操作：\n1. 启动Bit Browser客户端\n2. 确保API服务正常运行\n3. 重新检查API状态');
+                }
+            } else {
+                apiStatusEl.textContent = '不可用';
+                apiStatusEl.className = 'api-status unavailable';
+                this.addLog('error', 'API连接失败');
+                
+                if (result.guidance) {
+                    this.addLog('info', '解决方案：');
+                    this.addLog('info', result.guidance);
+                }
+            }
+        }
+    }
+
+    async startBot() {
+        this.addLog('info', '启动机器人...');
+        
+        // 先检查API状态
+        const statusCheck = await this.makeApiCall('/status');
+        if (!statusCheck.success) {
+            this.addLog('error', '无法连接到API服务，请先检查API状态');
+            this.showErrorDialog('启动失败', '无法连接到API服务，请：\n1. 确认Web API服务正在运行\n2. 点击"检查浏览器API"按钮\n3. 解决连接问题后重试');
+            return;
+        }
+        
+        // 检查浏览器API
+        if (statusCheck.data && statusCheck.data.browser_api_status === false) {
+            this.addLog('error', 'Bit Browser API未运行，无法启动机器人');
+            this.showErrorDialog('启动失败', 'Bit Browser API未运行，请：\n1. 启动Bit Browser客户端\n2. 确保API服务正常\n3. 重新检查API状态后再启动');
+            return;
+        }
+        
+        // 获取当前配置
+        let config = {};
+        if (configManager) {
+            configManager.updateConfig(); // 确保配置是最新的
+            config = configManager.config;
+        }
+        
+        // 验证配置
+        if (!config.browser_ids || config.browser_ids.length === 0 || config.browser_ids[0] === 'default') {
+            this.addLog('error', '浏览器ID配置无效');
+            this.showErrorDialog('启动失败', '浏览器ID配置无效，请：\n1. 点击"创建浏览器"按钮创建新的浏览器实例\n2. 或在配置中输入有效的浏览器ID\n3. 保存配置后重新启动');
+            return;
+        }
+        
+        const result = await this.makeApiCall('/start', 'POST', config);
+        
+        if (result.success) {
+            this.status = 'running';
+            this.addLog('success', '机器人启动成功');
+            this.startStatusCheck();
+        } else {
+            let errorMsg = result.message || result.error || '未知错误';
+            this.addLog('error', `启动失败: ${errorMsg}`);
+            
+            // 根据错误类型提供具体指导
+            let guidance = '';
+            if (errorMsg.includes('browser_id')) {
+                guidance = '浏览器ID相关错误，请：\n1. 检查浏览器ID是否有效\n2. 尝试创建新的浏览器实例\n3. 确认Bit Browser客户端正常运行';
+            } else if (errorMsg.includes('window limit')) {
+                guidance = '浏览器窗口数量已达上限，请：\n1. 关闭不需要的浏览器窗口\n2. 或删除不使用的浏览器配置\n3. 重新尝试启动';
+            } else if (errorMsg.includes('config')) {
+                guidance = '配置文件错误，请：\n1. 检查配置参数是否正确\n2. 尝试重置配置到默认值\n3. 重新保存配置';
+            } else {
+                guidance = '请检查：\n1. 所有服务是否正常运行\n2. 配置是否正确\n3. 查看详细日志获取更多信息';
+            }
+            
+            this.showErrorDialog('机器人启动失败', guidance);
+        }
+        
+        this.updateUI();
+    }
+
+    async stopBot() {
+        this.addLog('info', '停止机器人...');
+        const result = await this.makeApiCall('/stop', 'POST');
+        
+        if (result.success) {
+            this.status = 'stopped';
+            this.addLog('success', '机器人已停止');
+            this.stopStatusCheck();
+        } else {
+            this.addLog('error', `停止失败: ${result.error}`);
+        }
+        
+        this.updateUI();
+    }
+
+    async createBrowser() {
+        this.addLog('info', '创建新浏览器实例...');
+        
+        // 先检查API状态
+        const statusCheck = await this.makeApiCall('/status');
+        if (!statusCheck.success) {
+            this.addLog('error', '无法连接到API服务');
+            this.showErrorDialog('创建失败', '无法连接到API服务，请先检查API状态');
+            return;
+        }
+        
+        if (statusCheck.data && statusCheck.data.browser_api_status === false) {
+            this.addLog('error', 'Bit Browser API未运行');
+            this.showErrorDialog('创建失败', 'Bit Browser API未运行，请启动Bit Browser客户端');
+            return;
+        }
+        
+        const result = await this.makeApiCall('/create-browser', 'POST');
+        
+        if (result.success) {
+            this.addLog('success', `浏览器创建成功: ${result.browser_id}`);
+            this.addLog('info', '请将此浏览器ID复制到配置中并保存');
+            
+            // 自动更新配置中的浏览器ID
+            if (configManager && result.browser_id) {
+                const browserIdInput = document.getElementById('browser-ids');
+                if (browserIdInput) {
+                    browserIdInput.value = result.browser_id;
+                    configManager.updateConfig();
+                    this.addLog('success', '浏览器ID已自动更新到配置中');
+                }
+            }
+        } else {
+            let errorMsg = result.error || '未知错误';
+            this.addLog('error', `创建失败: ${errorMsg}`);
+            
+            let guidance = '';
+            if (errorMsg.includes('limit')) {
+                guidance = '浏览器数量已达上限，请：\n1. 删除不需要的浏览器配置\n2. 或联系管理员增加配额\n3. 重新尝试创建';
+            } else if (errorMsg.includes('permission')) {
+                guidance = '权限不足，请：\n1. 检查Bit Browser客户端权限\n2. 确认API服务配置正确\n3. 重新启动相关服务';
+            } else {
+                guidance = '请检查：\n1. Bit Browser客户端是否正常运行\n2. API服务是否正常\n3. 网络连接是否正常';
+            }
+            
+            this.showErrorDialog('创建浏览器失败', guidance);
+        }
+    }
+
+    startStatusCheck() {
+        if (this.statusCheckInterval) {
+            clearInterval(this.statusCheckInterval);
+        }
+        
+        this.statusCheckInterval = setInterval(async () => {
+            const result = await this.makeApiCall('/status');
+            if (result.success && result.data) {
+                this.updateStats(result.data);
+            }
+        }, 5000); // 每5秒检查一次状态
+    }
+
+    stopStatusCheck() {
+        if (this.statusCheckInterval) {
+            clearInterval(this.statusCheckInterval);
+            this.statusCheckInterval = null;
+        }
+    }
+
+    updateStats(data) {
+        if (data.stats) {
+            this.stats = { ...this.stats, ...data.stats };
+        }
+        
+        if (data.status) {
+            this.status = data.status;
+        }
+        
+        if (data.logs) {
+            data.logs.forEach(log => {
+                this.addLog(log.level, log.message);
+            });
+        }
+        
+        this.updateUI();
+    }
+
+    updateUI() {
+        // 更新状态徽章
+        const statusBadge = document.getElementById('executionStatus');
+        if (statusBadge) {
+            statusBadge.textContent = this.status === 'running' ? '运行中' : '已停止';
+            statusBadge.className = `status-badge ${this.status}`;
+        }
+
+        // 更新基础统计数据
+        const videosEl = document.getElementById('videosWatched');
+        const likesEl = document.getElementById('likesGiven');
+        const subscriptionsEl = document.getElementById('subscriptionsGiven');
+        const commentsEl = document.getElementById('commentsGiven');
+        const pauseEl = document.getElementById('pauseCount');
+        const replayEl = document.getElementById('replayCount');
+        const scrollEl = document.getElementById('scrollCount');
+        const runtimeEl = document.getElementById('runtime');
+        
+        if (videosEl) videosEl.textContent = this.stats.videosWatched || 0;
+        if (likesEl) likesEl.textContent = this.stats.likesGiven || 0;
+        if (subscriptionsEl) subscriptionsEl.textContent = this.stats.subscriptionsGiven || 0;
+        if (commentsEl) commentsEl.textContent = this.stats.commentsGiven || 0;
+        if (pauseEl) pauseEl.textContent = this.stats.pauseCount || 0;
+        if (replayEl) replayEl.textContent = this.stats.replayCount || 0;
+        if (scrollEl) scrollEl.textContent = this.stats.scrollCount || 0;
+        if (runtimeEl) runtimeEl.textContent = this.formatRuntime(this.stats.runtime || 0);
+
+        // 更新人类行为统计数据
+        const avgWatchTimeEl = document.getElementById('avgWatchTime');
+        const likeRateEl = document.getElementById('likeRate');
+        const subscribeRateEl = document.getElementById('subscribeRate');
+        const commentRateEl = document.getElementById('commentRate');
+        const pauseRateEl = document.getElementById('pauseRate');
+        const replayRateEl = document.getElementById('replayRate');
+        
+        if (avgWatchTimeEl) {
+            const avgTime = this.stats.avgWatchTime || 0;
+            avgWatchTimeEl.textContent = avgTime > 0 ? `${avgTime}秒` : '0秒';
+        }
+        
+        if (likeRateEl) {
+            const rate = this.calculateRate(this.stats.likesGiven, this.stats.videosWatched);
+            likeRateEl.textContent = `${rate}%`;
+        }
+        
+        if (subscribeRateEl) {
+            const rate = this.calculateRate(this.stats.subscriptionsGiven, this.stats.videosWatched);
+            subscribeRateEl.textContent = `${rate}%`;
+        }
+        
+        if (commentRateEl) {
+            const rate = this.calculateRate(this.stats.commentsGiven, this.stats.videosWatched);
+            commentRateEl.textContent = `${rate}%`;
+        }
+        
+        if (pauseRateEl) {
+            const rate = this.calculateRate(this.stats.pauseCount, this.stats.videosWatched);
+            pauseRateEl.textContent = `${rate}%`;
+        }
+        
+        if (replayRateEl) {
+            const rate = this.calculateRate(this.stats.replayCount, this.stats.videosWatched);
+            replayRateEl.textContent = `${rate}%`;
+        }
+
+        // 更新按钮状态
+        const startBtn = document.getElementById('startBot');
+        const stopBtn = document.getElementById('stopBot');
+        
+        if (startBtn) {
+            startBtn.disabled = this.status === 'running';
+        }
+        if (stopBtn) {
+            stopBtn.disabled = this.status === 'stopped';
+        }
+
+        // 更新日志
+        this.updateLogsDisplay();
+    }
+
+    formatRuntime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
+        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    calculateRate(numerator, denominator) {
+        if (!denominator || denominator === 0) {
+            return 0;
+        }
+        return Math.round((numerator / denominator) * 100);
+    }
+
+    addLog(level, message) {
+        const timestamp = new Date().toLocaleTimeString();
+        this.logs.unshift({ level, message, timestamp });
+        
+        // 限制日志数量，避免内存占用过多
+        if (this.logs.length > 100) {
+            this.logs = this.logs.slice(0, 100);
+        }
+    }
+    
+    showErrorDialog(title, message) {
+        // 创建错误对话框
+        const dialog = document.createElement('div');
+        dialog.className = 'error-dialog-overlay';
+        dialog.innerHTML = `
+            <div class="error-dialog">
+                <div class="error-dialog-header">
+                    <h3>⚠️ ${title}</h3>
+                    <button class="error-dialog-close" onclick="this.closest('.error-dialog-overlay').remove()">&times;</button>
+                </div>
+                <div class="error-dialog-content">
+                    <p>${message.replace(/\n/g, '<br>')}</p>
+                </div>
+                <div class="error-dialog-actions">
+                    <button class="btn btn-primary" onclick="this.closest('.error-dialog-overlay').remove()">我知道了</button>
+                </div>
+            </div>
+        `;
+        
+        // 添加样式
+        if (!document.getElementById('error-dialog-styles')) {
+            const styles = document.createElement('style');
+            styles.id = 'error-dialog-styles';
+            styles.textContent = `
+                .error-dialog-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 10000;
+                }
+                .error-dialog {
+                    background: #1a1a1a;
+                    border: 1px solid #333;
+                    border-radius: 8px;
+                    max-width: 500px;
+                    width: 90%;
+                    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+                }
+                .error-dialog-header {
+                    padding: 16px 20px;
+                    border-bottom: 1px solid #333;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .error-dialog-header h3 {
+                    margin: 0;
+                    color: #f85149;
+                    font-size: 18px;
+                }
+                .error-dialog-close {
+                    background: none;
+                    border: none;
+                    color: #8b949e;
+                    font-size: 24px;
+                    cursor: pointer;
+                    padding: 0;
+                    width: 30px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                .error-dialog-close:hover {
+                    color: #f0f6fc;
+                }
+                .error-dialog-content {
+                    padding: 20px;
+                    color: #e6edf3;
+                    line-height: 1.6;
+                }
+                .error-dialog-content p {
+                    margin: 0;
+                }
+                .error-dialog-actions {
+                    padding: 16px 20px;
+                    border-top: 1px solid #333;
+                    text-align: right;
+                }
+                .error-dialog-actions .btn {
+                    padding: 8px 16px;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+                .error-dialog-actions .btn-primary {
+                    background: #238636;
+                    color: white;
+                }
+                .error-dialog-actions .btn-primary:hover {
+                    background: #2ea043;
+                }
+            `;
+            document.head.appendChild(styles);
+        }
+        
+        document.body.appendChild(dialog);
+        
+        // 3秒后自动关闭（可选）
+        setTimeout(() => {
+            if (dialog.parentNode) {
+                dialog.remove();
+            }
+        }, 10000);
+    }
+    
+    clearLogs() {
+        this.logs = [];
+        this.updateLogsDisplay();
+        this.addLog('info', '日志已清空');
+    }
+    
+    updateLogsDisplay() {
+        const logsContainer = document.getElementById('execution-logs');
+        if (!logsContainer) return;
+        
+        logsContainer.innerHTML = '';
+        
+        this.logs.slice(0, 20).forEach(log => {
+            const logElement = document.createElement('div');
+            logElement.className = `log-entry log-${log.level}`;
+            logElement.innerHTML = `
+                <span class="log-timestamp">${log.timestamp}</span>
+                <span class="log-level">[${log.level.toUpperCase()}]</span>
+                <span class="log-message">${log.message}</span>
+            `;
+            logsContainer.appendChild(logElement);
+        });
+    }
+}
+
+// 初始化执行控制器
+let executionController;
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('execution-panel')) {
+        executionController = new ExecutionController();
+        executionController.updateUI(); // 初始化UI状态
+    }
+});

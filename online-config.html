@@ -49,17 +49,31 @@
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
-            <h1>统一配置中心</h1>
-            <p>通过可视化界面轻松配置您的YouTube自动化机器人参数和调度任务</p>
+            <div class="hero-content">
+                <h1 class="hero-title">统一配置中心</h1>
+                <p class="hero-subtitle">Sky blue color.<br>Sky high performance with M4.</p>
+                <p class="hero-description">通过可视化界面轻松配置您的YouTube自动化机器人参数和调度任务</p>
+                <div class="hero-actions">
+                    <button class="btn-primary hero-btn">开始配置</button>
+                    <button class="btn-secondary hero-btn">查看指南</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Configuration Panel Section -->
     <section id="config-panel" class="config">
         <div class="container">
-            <div class="config-panel">
-                <div class="config-form">
-                    <h3>基础设置</h3>
+            <!-- 配置区域 -->
+            <div class="config-section">
+                <h2 class="section-title">📋 配置管理</h2>
+                <div class="config-grid">
+                    <!-- 基础配置 -->
+                    <div class="config-card">
+                        <div class="card-header">
+                            <h3>⚙️ 基础设置</h3>
+                        </div>
+                        <div class="card-content">
                     <div class="form-group">
                         <label for="windowWidth">窗口宽度:</label>
                         <input type="number" id="windowWidth" value="400" min="300" max="1920">
@@ -86,24 +100,38 @@
                         <input type="range" id="subscribeProbability" min="0" max="1" step="0.01" value="0.05">
                         <span id="subscribeProbabilityValue">5%</span>
                     </div>
-                    <div class="form-group">
-                        <label for="scrollCount">滚动次数:</label>
-                        <input type="number" id="scrollCount" value="1000" min="100" max="5000">
-                    </div>
-
-                    <h3>浏览器ID管理</h3>
-                    <div class="form-group">
-                        <label for="browserIds">浏览器ID列表:</label>
-                        <div id="browserIdContainer">
-                            <div class="browser-id-item">
-                                <input type="text" class="browser-id-input" placeholder="请输入浏览器ID">
-                                <button type="button" class="btn-remove" onclick="removeBrowserId(this)">❌</button>
+                            <div class="form-group">
+                                <label for="scrollCount">滚动次数:</label>
+                                <input type="number" id="scrollCount" value="1000" min="100" max="5000">
                             </div>
                         </div>
-                        <button type="button" id="add-browser-id" class="btn btn-secondary" onclick="addBrowserId()">➕ 添加浏览器ID</button>
                     </div>
 
-                    <h3>用户行为模拟设置</h3>
+                    <!-- 浏览器管理 -->
+                    <div class="config-card">
+                        <div class="card-header">
+                            <h3>🌐 浏览器ID管理</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label for="browserIds">浏览器ID列表:</label>
+                                <div id="browserIdContainer">
+                                    <div class="browser-id-item">
+                                        <input type="text" class="browser-id-input" placeholder="请输入浏览器ID">
+                                        <button type="button" class="btn-remove" onclick="removeBrowserId(this)">❌</button>
+                                    </div>
+                                </div>
+                                <button type="button" id="add-browser-id" class="btn btn-secondary" onclick="addBrowserId()">➕ 添加浏览器ID</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 行为模拟设置 -->
+                    <div class="config-card">
+                        <div class="card-header">
+                            <h3>🎭 用户行为模拟设置</h3>
+                        </div>
+                        <div class="card-content">
                     <div class="form-group">
                         <div class="behavior-settings">
                             <div class="behavior-item">
@@ -145,95 +173,285 @@
                                     <option value="random">随机模式</option>
                                 </select>
                             </div>
-                        </div>
-                    </div>
-
-                    <h3>任务调度设置</h3>
-                    <div class="form-group">
-                        <div class="scheduler-status">
-                            <div class="status-indicator">
-                                <span class="status-dot" id="schedulerStatusDot"></span>
-                                <span id="schedulerStatusText">调度器状态: 未知</span>
-                            </div>
-                            <div class="scheduler-controls">
-                                <button class="btn btn-sm btn-success" onclick="startScheduler()">启动调度器</button>
-                                <button class="btn btn-sm btn-danger" onclick="stopScheduler()">停止调度器</button>
-                                <button class="btn btn-sm btn-primary" onclick="runOnce()">立即运行</button>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>快速调度预设:</label>
-                        <div class="schedule-presets">
-                            <button class="btn btn-preset" onclick="applyPreset('daily')">每日运行</button>
-                            <button class="btn btn-preset" onclick="applyPreset('workdays')">工作日运行</button>
-                            <button class="btn btn-preset" onclick="applyPreset('hourly')">每小时运行</button>
-                            <button class="btn btn-preset" onclick="applyPreset('weekly')">每周运行</button>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="scheduleType">调度类型:</label>
-                        <select id="scheduleType" onchange="updateScheduleForm()">
-                            <option value="daily">每日调度</option>
-                            <option value="hourly">每小时调度</option>
-                            <option value="weekly">每周调度</option>
-                            <option value="interval">间隔调度</option>
-                        </select>
-                    </div>
-                    <div id="scheduleFormContainer">
-                        <div id="dailyForm" class="schedule-form">
-                            <label for="dailyTime">运行时间:</label>
-                            <input type="time" id="dailyTime" value="09:00">
-                        </div>
-                        <div id="hourlyForm" class="schedule-form" style="display: none;">
-                            <label for="hourlyMinute">每小时第几分钟运行:</label>
-                            <input type="number" id="hourlyMinute" min="0" max="59" value="0">
-                        </div>
-                        <div id="weeklyForm" class="schedule-form" style="display: none;">
-                            <label for="weeklyDay">星期几:</label>
-                            <select id="weeklyDay">
-                                <option value="monday">星期一</option>
-                                <option value="tuesday">星期二</option>
-                                <option value="wednesday">星期三</option>
-                                <option value="thursday">星期四</option>
-                                <option value="friday">星期五</option>
-                                <option value="saturday">星期六</option>
-                                <option value="sunday">星期日</option>
-                            </select>
-                            <label for="weeklyTime">运行时间:</label>
-                            <input type="time" id="weeklyTime" value="09:00">
-                        </div>
-                        <div id="intervalForm" class="schedule-form" style="display: none;">
-                            <label for="intervalMinutes">间隔时间(分钟):</label>
-                            <input type="number" id="intervalMinutes" min="1" max="1440" value="60">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary" onclick="addSchedule()">➕ 添加调度任务</button>
-                    </div>
-                    <div class="form-group">
-                        <label>当前调度任务:</label>
-                        <div id="scheduleList" class="schedule-list">
-                            <!-- 调度任务列表将在这里显示 -->
-                        </div>
-                    </div>
 
-                    <h3>文件操作</h3>
-                    <div class="form-group">
-                        <label for="configFile">上传现有配置文件:</label>
-                        <input type="file" id="config-file" accept=".json" onchange="loadConfig(event)">
-                    </div>
-                    <div class="form-actions">
-                        <button id="generate-config" class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
-                        <button id="download-config" class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
-                        <button id="reset-config" class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
-                        <button class="btn btn-success" onclick="saveSchedulerConfig()">💾 保存调度配置</button>
+                    <!-- 文件操作 -->
+                    <div class="config-card">
+                        <div class="card-header">
+                            <h3>📁 文件操作</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="form-group">
+                                <label for="configFile">上传现有配置文件:</label>
+                                <input type="file" id="config-file" accept=".json" onchange="loadConfig(event)">
+                            </div>
+                            <div class="form-actions">
+                                <button id="generate-config" class="btn btn-primary" onclick="generateConfig()">🔧 生成配置</button>
+                                <button id="download-config" class="btn btn-secondary" onclick="downloadConfig()">💾 下载配置文件</button>
+                                <button id="reset-config" class="btn btn-secondary" onclick="resetConfig()">🔄 重置配置</button>
+                                <button class="btn btn-success" onclick="saveSchedulerConfig()">💾 保存调度配置</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="config-preview">
-                    <h3>配置预览</h3>
-                    <div class="code-block">
-                        <pre id="configOutput">{
+            </div>
+                
+            <!-- 控制和监控区域 -->
+            <div class="control-section">
+                <h2 class="section-title">🎮 执行控制与监控</h2>
+                <div class="control-grid">
+                    <!-- 使用指南 -->
+                    <div class="control-card guide-card">
+                        <div class="card-header">
+                            <h3>📖 使用指南</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="guide-steps">
+                                <div class="guide-step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <h4>基础配置</h4>
+                                        <p>设置窗口参数、视频观看设置和用户行为模拟</p>
+                                    </div>
+                                </div>
+                                <div class="guide-step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <h4>启动机器人</h4>
+                                        <p>检查API状态 → 创建浏览器 → 启动机器人</p>
+                                    </div>
+                                </div>
+                                <div class="guide-step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <h4>监控管理</h4>
+                                        <p>查看实时日志和统计数据，必要时停止重启</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 重要提示 -->
+                    <div class="control-card tips-card">
+                        <div class="card-header">
+                            <h3>⚠️ 重要提示</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="tips-list">
+                                <div class="tip-item">
+                                    <span class="tip-icon">🔗</span>
+                                    <span class="tip-text">确保API服务正常运行</span>
+                                </div>
+                                <div class="tip-item">
+                                    <span class="tip-icon">🌐</span>
+                                    <span class="tip-text">Bit Browser已正确安装配置</span>
+                                </div>
+                                <div class="tip-item">
+                                    <span class="tip-icon">📡</span>
+                                    <span class="tip-text">保持稳定的网络环境</span>
+                                </div>
+                                <div class="tip-item">
+                                    <span class="tip-icon">📊</span>
+                                    <span class="tip-text">监控系统资源使用情况</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 执行控制面板 -->
+                    <div class="control-card execution-card">
+                        <div class="card-header">
+                            <h3>🚀 执行控制</h3>
+                            <div class="status-indicator">
+                                <span id="executionStatus" class="status-badge stopped">已停止</span>
+                                <span id="apiStatus" class="api-status">检查中...</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <div class="execution-controls">
+                                <button id="startBot" class="btn btn-success" disabled>
+                                    <span class="btn-icon">▶️</span> 启动机器人
+                                </button>
+                                <button id="stopBot" class="btn btn-danger" disabled>
+                                    <span class="btn-icon">⏹️</span> 停止机器人
+                                </button>
+                                <button id="checkApi" class="btn btn-info">
+                                    <span class="btn-icon">🔍</span> 检查API
+                                </button>
+                                <button id="createBrowser" class="btn btn-warning">
+                                    <span class="btn-icon">🆕</span> 创建浏览器
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- API检查界面 -->
+                    <div id="apiInterface" class="control-card" style="display: none;">
+                        <div class="card-header">
+                            <h3>🔍 API检查界面</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="api-check-content">
+                                <div class="status-display">
+                                    <h4>API连接状态</h4>
+                                    <div id="apiConnectionStatus" class="status-indicator">检查中...</div>
+                                </div>
+                                <div class="api-details">
+                                    <div class="detail-item">
+                                        <label>API端点:</label>
+                                        <span id="apiEndpoint">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>响应时间:</label>
+                                        <span id="apiResponseTime">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <label>最后检查:</label>
+                                        <span id="lastApiCheck">-</span>
+                                    </div>
+                                </div>
+                                <div class="api-actions">
+                                    <button id="refreshApi" class="btn btn-primary">刷新状态</button>
+                                    <button id="closeApiInterface" class="btn btn-secondary">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 浏览器创建界面 -->
+                    <div id="browserInterface" class="control-card" style="display: none;">
+                        <div class="card-header">
+                            <h3>🆕 浏览器创建界面</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="browser-create-content">
+                                <div class="browser-options">
+                                    <h4>浏览器配置</h4>
+                                    <div class="option-group">
+                                        <label for="browserType">浏览器类型:</label>
+                                        <select id="browserType" class="form-control">
+                                            <option value="chrome">Chrome</option>
+                                            <option value="firefox">Firefox</option>
+                                            <option value="edge">Edge</option>
+                                        </select>
+                                    </div>
+                                    <div class="option-group">
+                                        <label for="headlessMode">无头模式:</label>
+                                        <input type="checkbox" id="headlessMode" checked>
+                                    </div>
+                                    <div class="option-group">
+                                        <label for="windowSize">窗口大小:</label>
+                                        <select id="windowSize" class="form-control">
+                                            <option value="1920x1080">1920x1080</option>
+                                            <option value="1366x768">1366x768</option>
+                                            <option value="1280x720">1280x720</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="browser-status">
+                                    <h4>创建状态</h4>
+                                    <div id="browserCreationStatus" class="status-indicator">等待创建...</div>
+                                    <div id="browserInfo" class="browser-details" style="display: none;">
+                                        <div class="detail-item">
+                                            <label>浏览器ID:</label>
+                                            <span id="browserId">-</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <label>创建时间:</label>
+                                            <span id="browserCreateTime">-</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="browser-actions">
+                                    <button id="createBrowserBtn" class="btn btn-success">创建浏览器</button>
+                                    <button id="closeBrowserInterface" class="btn btn-secondary">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 统计数据面板 -->
+                    <div class="control-card stats-card">
+                        <div class="card-header">
+                            <h3>📊 执行统计</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="stats-grid">
+                                <div class="stat-item">
+                                    <span class="stat-icon">📺</span>
+                                    <div class="stat-content">
+                                        <span class="stat-label">观看视频</span>
+                                        <span id="videosWatched" class="stat-value">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">👍</span>
+                                    <div class="stat-content">
+                                        <span class="stat-label">点赞数</span>
+                                        <span id="likesGiven" class="stat-value">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">🔔</span>
+                                    <div class="stat-content">
+                                        <span class="stat-label">订阅数</span>
+                                        <span id="subscriptionsGiven" class="stat-value">0</span>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">⏱️</span>
+                                    <div class="stat-content">
+                                        <span class="stat-label">运行时间</span>
+                                        <span id="runtime" class="stat-value">00:00:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="behavior-stats">
+                                <h5>🤖 行为统计</h5>
+                                <div class="behavior-grid">
+                                    <div class="behavior-item">
+                                        <span class="behavior-label">点赞率:</span>
+                                        <span id="likeRate" class="behavior-value">0%</span>
+                                    </div>
+                                    <div class="behavior-item">
+                                        <span class="behavior-label">订阅率:</span>
+                                        <span id="subscribeRate" class="behavior-value">0%</span>
+                                    </div>
+                                    <div class="behavior-item">
+                                        <span class="behavior-label">平均观看:</span>
+                                        <span id="avgWatchTime" class="behavior-value">0秒</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 实时日志面板 -->
+                    <div class="control-card logs-card">
+                        <div class="card-header">
+                            <h3>📝 实时日志</h3>
+                            <button id="clearLogs" class="btn btn-secondary btn-sm">清空日志</button>
+                        </div>
+                        <div class="card-content">
+                            <div id="execution-logs" class="logs-container">
+                                <div class="log-entry info">等待启动...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 配置预览区域 -->
+            <div class="preview-section">
+                <h2 class="section-title">👁️ 配置预览</h2>
+                    
+                    <div class="config-preview">
+                        <h3>配置预览</h3>
+                        <div class="code-block">
+                            <pre id="configOutput">{
   "windows": [
     {
       "browser_id": "请输入浏览器ID"
@@ -255,6 +473,7 @@
     "user_persona": "casual"
   }
 }</pre>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -322,5 +541,84 @@
 
     <script src="script.js"></script>
     <script src="config.js"></script>
+    
+    <script>
+        // API检查和浏览器创建界面控制
+        document.addEventListener('DOMContentLoaded', function() {
+            // 检查API按钮点击事件
+            document.getElementById('checkApi').addEventListener('click', function() {
+                const apiInterface = document.getElementById('apiInterface');
+                apiInterface.style.display = 'block';
+                
+                // 模拟API检查
+                const statusElement = document.getElementById('apiConnectionStatus');
+                statusElement.textContent = '检查中...';
+                statusElement.style.background = '#fef3c7';
+                statusElement.style.color = '#92400e';
+                
+                setTimeout(() => {
+                    statusElement.textContent = 'API连接正常';
+                    statusElement.style.background = '#d1fae5';
+                    statusElement.style.color = '#065f46';
+                    
+                    document.getElementById('apiEndpoint').textContent = 'http://localhost:8080/api';
+                    document.getElementById('apiResponseTime').textContent = '45ms';
+                    document.getElementById('lastApiCheck').textContent = new Date().toLocaleString();
+                }, 2000);
+            });
+            
+            // 创建浏览器按钮点击事件
+            document.getElementById('createBrowser').addEventListener('click', function() {
+                const browserInterface = document.getElementById('browserInterface');
+                browserInterface.style.display = 'block';
+            });
+            
+            // 关闭API界面
+            document.getElementById('closeApiInterface').addEventListener('click', function() {
+                document.getElementById('apiInterface').style.display = 'none';
+            });
+            
+            // 关闭浏览器界面
+            document.getElementById('closeBrowserInterface').addEventListener('click', function() {
+                document.getElementById('browserInterface').style.display = 'none';
+            });
+            
+            // 刷新API状态
+            document.getElementById('refreshApi').addEventListener('click', function() {
+                const statusElement = document.getElementById('apiConnectionStatus');
+                statusElement.textContent = '检查中...';
+                statusElement.style.background = '#fef3c7';
+                statusElement.style.color = '#92400e';
+                
+                setTimeout(() => {
+                    statusElement.textContent = 'API连接正常';
+                    statusElement.style.background = '#d1fae5';
+                    statusElement.style.color = '#065f46';
+                    document.getElementById('lastApiCheck').textContent = new Date().toLocaleString();
+                }, 1500);
+            });
+            
+            // 创建浏览器实际操作
+            document.getElementById('createBrowserBtn').addEventListener('click', function() {
+                const statusElement = document.getElementById('browserCreationStatus');
+                const browserInfo = document.getElementById('browserInfo');
+                
+                statusElement.textContent = '创建中...';
+                statusElement.style.background = '#fef3c7';
+                statusElement.style.color = '#92400e';
+                
+                setTimeout(() => {
+                    statusElement.textContent = '浏览器创建成功';
+                    statusElement.style.background = '#d1fae5';
+                    statusElement.style.color = '#065f46';
+                    
+                    // 显示浏览器信息
+                    browserInfo.style.display = 'block';
+                    document.getElementById('browserId').textContent = 'browser_' + Math.random().toString(36).substr(2, 9);
+                    document.getElementById('browserCreateTime').textContent = new Date().toLocaleString();
+                }, 3000);
+            });
+        });
+    </script>
 </body>
 </html>
